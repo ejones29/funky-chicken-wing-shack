@@ -15,7 +15,7 @@ const config: GatsbyConfig = {
       "projectId": "q8rlikfg",
       "dataset": "production"
     }
-  }, "gatsby-plugin-dts-css-modules", "gatsby-plugin-image", "gatsby-plugin-sharp", "gatsby-transformer-sharp"]
+  }, "gatsby-plugin-dts-css-modules", "gatsby-plugin-image", "gatsby-plugin-sharp", "gatsby-transformer-sharp", "gatsby-plugin-react-svg" ]
 };
 
 export default config;
