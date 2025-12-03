@@ -1,0 +1,16 @@
+.section {
+  padding: 24px var(--gap-page) 8px;
+}
+
+.grid {
+  /* max-width: 700px; */
+  margin: 0 auto;
+  display: grid;
+  gap: 14px;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}

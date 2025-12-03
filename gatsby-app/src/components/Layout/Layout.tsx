@@ -3,6 +3,7 @@ import * as styles from "./Layout.module.css"
 import NavBar from "../NavBar/NavBar"
 import Footer from "../Footer/Footer"
 import Header from "../Header/Header"
+import { BottomTabBar } from "../BottomTabBar/BottomTabBar"
 
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -11,6 +12,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <div className={styles.container}>
         <Header />
         <main>{children}</main>
+        <BottomTabBar />
         <Footer />
       </div>
     </main>

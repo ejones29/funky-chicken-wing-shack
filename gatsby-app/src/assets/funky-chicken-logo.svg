@@ -7,9 +7,7 @@
   aria-labelledby="title desc"
 >
   <title id="title">Funky Chicken Wing Shack Logo</title>
-  <desc id="desc">
-    Clean, tightly cropped stacked logo with corrected left and top boundaries.
-  </desc>
+  <desc id="desc">Neon glow version with dark/light mode auto switching.</desc>
 
   <defs>
     <style>
@@ -17,31 +15,51 @@
         font-family: "Fredoka", sans-serif;
         text-transform: uppercase;
       }
-      .funky-outline {
-        fill: none;
-        stroke: #ff7d29;
-        stroke-width: 5;
-        paint-order: stroke fill;
-      }
-      .funky-fill {
-        fill: #ffd84a;
-      }
-      .chicken-outline {
-        fill: none;
-        stroke: #ff3e7f;
-        stroke-width: 5;
-        paint-order: stroke fill;
-      }
-      .chicken-fill {
-        fill: #ff83b5;
-      }
-      .wing-fill {
-        fill: #19f0d0;
+
+      /* Dark mode (default neon palette) */
+      .funky-fill   { fill: #ffd84a; }
+      .funky-outline { stroke: #ff7d29; stroke-width: 5; fill: none; paint-order: stroke fill; }
+
+      .chicken-fill   { fill: #ff83b5; }
+      .chicken-outline { stroke: #ff3e7f; stroke-width: 5; fill: none; paint-order: stroke fill; }
+
+      .wing-fill { fill: #19f0d0; }
+
+      /* Light mode overrides */
+      @media (prefers-color-scheme: light) {
+        .funky-fill   { fill: #f7b21b; }
+        .funky-outline { stroke: #c46a00; }
+
+        .chicken-fill   { fill: #e05287; }
+        .chicken-outline { stroke: #ac2e59; }
+
+        .wing-fill { fill: #008f7f; }
       }
     </style>
+
+    <!-- Neon Glow Filter -->
+    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <!-- Duplicate source -->
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1" result="blur" />
+      <!-- Intensify -->
+      <feColorMatrix
+        in="blur"
+        type="matrix"
+        values="1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                0 0 0 1.5 0"
+        result="glow"
+      />
+      <!-- Merge glow + text stroke -->
+      <feMerge>
+        <feMergeNode in="glow" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
   </defs>
 
-  <!-- FUNKY -->
+  <!-- FUNKY (glowing outline + crisp fill) -->
   <text
     x="4"
     y="30"
@@ -49,6 +67,7 @@
     font-weight="800"
     letter-spacing="0.06em"
     class="txt funky-outline"
+    filter="url(#neonGlow)"
   >
     FUNKY
   </text>
@@ -71,10 +90,10 @@
     font-weight="800"
     letter-spacing="0.06em"
     class="txt chicken-outline"
+    filter="url(#neonGlow)"
   >
     CHICKEN
   </text>
-
   <text
     x="4"
     y="64"

@@ -44,3 +44,26 @@ main {
 .gatsby-image-wrapper img[src*="base64"] {
   image-rendering: pixelated;
 }
+
+.main {
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 64px; /* space for tab bar */
+  overflow-x: hidden;
+  background: radial-gradient(circle at top, #50037a, #14001f 55%, #000000);
+}
+
+.backgroundOverlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at top right, #ff3fbc33, transparent 55%),
+    radial-gradient(circle at bottom left, #3cf3ff33, transparent 55%);
+  opacity: 0.9;
+  z-index: -1;
+}
+
+.content {
+  max-width: 1100px;
+  margin: 0 auto;
+}
