@@ -1,8 +1,4 @@
-main {
-  margin: auto;
-  max-width: 1600px;
-}
-
 .container {
+  max-width: 1600px;
   padding: 0 10%;
 }

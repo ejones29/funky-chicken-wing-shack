@@ -14,10 +14,11 @@ export const ActionButton: React.FC<ActionButtonProps> = ({
   onClick,
   variant = "pink",
 }) => {
+  const variantClass = styles[variant] ?? "";
   return (
     <button
       onClick={onClick}
-      className={`${styles.button} ${styles[variant]}`}
+      className={`${styles.button} ${variantClass}`}
     >
       {icon && <span className={styles.icon}>{icon}</span>}
       <span className={styles.label}>{label}</span>

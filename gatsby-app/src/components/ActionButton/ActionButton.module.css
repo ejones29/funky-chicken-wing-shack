@@ -2,21 +2,26 @@
   width: 100%;
   padding: 16px 20px;
   border-radius: var(--radius-lg);
-  font-weight: 600;
   font-size: 1.125rem;
   text-transform: uppercase;
   border: 2px solid transparent;
-  background: transparent;
+  background: rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 12px;
-  transition: transform 0.15s ease, box-shadow 0.2s ease;
+  transition: transform 0.15s ease, box-shadow 0.2s ease,
+    background-color 0.2s ease, border-color 0.2s ease;
+  box-shadow: var(--shadow-soft);
 }
 
 .button:hover {
   transform: translateY(-2px);
   cursor: pointer;
+}
+
+.button:active {
+  transform: translateY(0);
 }
 
 .pink {
@@ -40,9 +45,13 @@
 }
 
 .icon {
-  font-size: 1.25rem;
+  font-size: 1.4rem;
+  display: flex;
 }
 
 .label {
   font-size: inherit;
+  color: var(--color-text);
+  letter-spacing: var(--ls-wider);
+  white-space: nowrap;
 }

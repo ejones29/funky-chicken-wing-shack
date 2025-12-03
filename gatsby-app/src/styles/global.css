@@ -1,82 +1,12 @@
+@import './variables.css';
+@import './fonts.css';
+@import './typography.css';
+
 /* Reset / base */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-}
-
-/* Font Faces */
-@font-face {
-  font-family: 'Fredoka';
-  src: url('../assets/fonts/Fredoka-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Poppins';
-  src: url('../assets/fonts/Poppins-SemiBold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Variables */
-:root {
-  /* FONT FAMILIES */
-  --font-display: "Fredoka", sans-serif;
-  --font-body: "Poppins", sans-serif;
-
-  /* FONT WEIGHTS */
-  --weight-regular: 400;
-  --weight-medium: 500;
-  --weight-semibold: 600;
-  --weight-bold: 700;
-  --weight-extrabold: 800;
-
-  /* TYPE SCALE – Mobile default */
-  --fs-display: 3rem;
-  --fs-h1: 2rem;
-  --fs-h2: 1.5rem;
-  --fs-h3: 1.25rem;
-  --fs-h4: 1.125rem;
-  --fs-body-lg: 1rem;
-  --fs-body: 0.9375rem;
-  --fs-caption: 0.75rem;
-
-  /* LINE HEIGHT */
-  --lh-tight: 1.1;
-  --lh-snug: 1.2;
-  --lh-normal: 1.4;
-  --lh-relaxed: 1.6;
-
-  /* LETTER SPACING */
-  --ls-tight: -0.01em;
-  --ls-normal: 0;
-  --ls-wide: 0.03em;
-
-  /* COLORS */
-  --color-background: #1a0024;
-  --color-background-dark: #000012;
-
-  --color-primary-pink: #ff3fbc;
-  --color-primary-teal: #3cf3ff;
-  --color-accent-gold: #ffc700;
-  --color-accent-purple: #8b00e6;
-
-  --color-text: #ffffff;
-  --color-text-secondary: #ffd1ff;
-
-  --gradient-hero: linear-gradient(180deg, #350046, #14001f);
-  --gradient-hero-dark: linear-gradient(180deg, #000e26, #000000);
-
-  --radius-lg: 16px;
-  --radius-md: 12px;
-  --radius-sm: 8px;
-
-  --shadow-neon-pink: 0 0 12px rgba(255, 63, 188, 0.6);
-  --shadow-neon-teal: 0 0 12px rgba(60, 243, 255, 0.6);
 }
 
 html, body {
@@ -89,71 +19,21 @@ html, body {
   color: var(--color-text);
 }
 
-/* Typography */
-.display {
-  font-family: var(--font-display);
-  font-size: var(--fs-display);
-  font-weight: var(--weight-extrabold);
-  line-height: var(--lh-tight);
-  letter-spacing: var(--ls-tight);
-}
-
-h1, .h1 {
-  font-family: var(--font-display);
-  font-size: var(--fs-h1);
-  font-weight: var(--weight-bold);
-  line-height: var(--lh-tight);
-}
-
-h2, .h2 {
-  font-family: var(--font-display);
-  font-size: var(--fs-h2);
-  font-weight: var(--weight-semibold);
-  line-height: var(--lh-snug);
-}
-
-h3, .h3 {
-  font-family: var(--font-display);
-  font-size: var(--fs-h3);
-  font-weight: var(--weight-semibold);
-}
-
-.body {
-  font-family: var(--font-body);
-  font-size: var(--fs-body);
-  line-height: var(--lh-normal);
-}
-
-.bodyLg {
-  font-family: var(--font-body);
-  font-size: var(--fs-body-lg);
-  line-height: var(--lh-normal);
-}
-
-.caption {
-  font-family: var(--font-body);
-  font-size: var(--fs-caption);
-  line-height: var(--lh-normal);
-  letter-spacing: var(--ls-wide);
-}
-
-.buttonText {
-  font-family: var(--font-body);
-  font-weight: var(--weight-bold);
-  letter-spacing: var(--ls-wide);
-  text-transform: uppercase;
-  line-height: var(--lh-tight);
-}
-
 /* Elements */
-span {
-  color: var(--color-primary-pink);
-}
-
 img {
   max-width: 100%;
-  height: auto;
   display: block;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+main {
+  min-height: 100vh;
 }
 
 /* Gatsby Image Overrides */

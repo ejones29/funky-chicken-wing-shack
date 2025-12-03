@@ -8,12 +8,12 @@ const IndexPage: React.FC<PageProps> = () => {
       <h1 className="display">
         Get Funky.
         <br />
-        <span>Get Saucy.</span>
+        <span className="tilted pinkText">Get Saucy.</span>
       </h1>
       <ActionButton
         label="Order Wings"
         icon="🔥"
-        variant="teal"
+        variant="pink"
         onClick={() => alert("Action Button Clicked!")}
       />    
     </>
