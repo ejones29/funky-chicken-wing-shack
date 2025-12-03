@@ -1,13 +1,11 @@
 import * as React from "react"
 import type { HeadFC, PageProps } from "gatsby"
-import "../styles/global.css"
-import "../styles/variables.css"
 import { ActionButton } from "../components/ActionButton/ActionButton"
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
     <>
-      <h1>
+      <h1 className="display">
         Get Funky.
         <br />
         <span>Get Saucy.</span>

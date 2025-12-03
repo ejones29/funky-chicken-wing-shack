@@ -1,6 +1,8 @@
 import React from "react";
 import type { GatsbyBrowser } from "gatsby"
 import Layout from "./src/components/Layout/Layout";
+import 'normalize.css';
+import "./src/styles/global.css"
 
 /**
  * wrapPageElement is an API that allows you to wrap Gatsby page components
