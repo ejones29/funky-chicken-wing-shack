@@ -1,0 +1,22 @@
+:root {
+  --color-background: #1a0024;
+  --color-background-dark: #000012;
+
+  --color-primary-pink: #ff3fbc;
+  --color-primary-teal: #3cf3ff;
+  --color-accent-gold: #ffc700;
+  --color-accent-purple: #8b00e6;
+
+  --color-text: #ffffff;
+  --color-text-secondary: #ffd1ff;
+
+  --gradient-hero: linear-gradient(180deg, #350046, #14001f);
+  --gradient-hero-dark: linear-gradient(180deg, #000e26, #000000);
+
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+
+  --shadow-neon-pink: 0 0 12px rgba(255, 63, 188, 0.6);
+  --shadow-neon-teal: 0 0 12px rgba(60, 243, 255, 0.6);
+}

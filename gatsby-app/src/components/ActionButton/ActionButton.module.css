@@ -1,0 +1,47 @@
+.button {
+  width: 100%;
+  padding: 16px 20px;
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  font-size: 1.125rem;
+  border: 2px solid transparent;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  cursor: pointer;
+}
+
+.pink {
+  border-color: var(--color-primary-pink);
+  color: var(--color-primary-pink);
+  box-shadow: var(--shadow-neon-pink);
+}
+
+.pink:hover {
+  background: rgba(255, 63, 188, 0.1);
+}
+
+.teal {
+  border-color: var(--color-primary-teal);
+  color: var(--color-primary-teal);
+  box-shadow: var(--shadow-neon-teal);
+}
+
+.teal:hover {
+  background: rgba(60, 243, 255, 0.1);
+}
+
+.icon {
+  font-size: 1.25rem;
+}
+
+.label {
+  font-size: inherit;
+}
