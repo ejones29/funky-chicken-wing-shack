@@ -8,23 +8,24 @@ interface TabItem {
   label: string;
   icon: React.ReactNode;
   isActive?: boolean;
+  to: string;
 }
 
 const tabs: TabItem[] = [
-  { label: "Home", icon: <FaHome size={20}/>, isActive: true },
-  { label: "Menu", icon: <MdOutlineRestaurantMenu size={20}/> },
-  { label: "Account", icon: <MdAccountCircle size={20} /> },
+  { label: "Home", icon: <FaHome size={20}/>, isActive: true, to: "/" },
+  { label: "Menu", icon: <MdOutlineRestaurantMenu size={20} />, to: "/menu" },
+  { label: "Account", icon: <MdAccountCircle size={20} />, to: "/account" },
 ];
 
 export const BottomTabBar: React.FC = () => {
   return (
     <nav className={styles.nav} aria-label="Mobile navigation">
       <ul className={styles.list}>
-        {tabs.map((t) => (
-          <li key={t.label} className={styles.item}>
-            <Link to={`/${t.label.toLowerCase()}`} className={`${styles.button} ${t.isActive ? styles.active : ""}`}>
-              <span className={styles.icon}>{t.icon}</span>
-              <span className={styles.label}>{t.label}</span>
+        {tabs.map((item) => (
+          <li key={item.label} className={styles.item}>
+            <Link to={item.to} className={`${styles.button} ${item.isActive ? styles.active : ""}`}>
+              <span className={styles.icon}>{item.icon}</span>
+              <span className={styles.label}>{item.label}</span>
             </Link>
           </li>
         ))}
