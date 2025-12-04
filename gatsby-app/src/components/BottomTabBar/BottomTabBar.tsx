@@ -1,7 +1,9 @@
 import React from "react";
 import * as styles from "./BottomTabBar.module.css";
 import { Link } from "gatsby";
-
+import { FaHome } from "react-icons/fa";
+import { MdOutlineRestaurantMenu } from "react-icons/md";
+import { MdAccountCircle } from "react-icons/md";
 interface TabItem {
   label: string;
   icon: React.ReactNode;
@@ -9,9 +11,9 @@ interface TabItem {
 }
 
 const tabs: TabItem[] = [
-  { label: "Home", icon: "🏠", isActive: true },
-  { label: "Menu", icon: "📋" },
-  { label: "Account", icon: "👤" },
+  { label: "Home", icon: <FaHome size={20}/>, isActive: true },
+  { label: "Menu", icon: <MdOutlineRestaurantMenu size={20}/> },
+  { label: "Account", icon: <MdAccountCircle size={20} /> },
 ];
 
 export const BottomTabBar: React.FC = () => {
