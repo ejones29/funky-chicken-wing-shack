@@ -1,25 +1,25 @@
-import React, { useMemo, useState } from 'react'
-import * as styles from './flavors.module.css'
-import { FlavorCard} from '../../components/FlavorCard/FlavorCard'
+import React, { useMemo, useState } from "react";
+import * as styles from "./flavors.module.css";
+import { FlavorCard } from "../../components/FlavorCard/FlavorCard";
 
-import BuffaloHotImage from '../../assets/images/flavors/buffalo-hot.png'
-import BoogieBBQImage from '../../assets/images/flavors/boogie-bbq.png'
-import ChickenLickinImage from '../../assets/images/flavors/honey-mustard.png'
-import FunkadelicFireImage from '../../assets/images/flavors/funkadelic-fire.png'
-import GroovyGarlicImage from '../../assets/images/flavors/groovy-garlic.png'
-import JivinJerkImage from '../../assets/images/flavors/jivin-jerk.png'
-import DiscoInfernoImage from '../../assets/images/flavors/disco-inferno.png'
-import SoulfulSrirachaImage from '../../assets/images/flavors/soulful-sriracha.png'
-import PsychedelicPineappleImage from '../../assets/images/flavors/psychedelic-pineapple.png'
+import BuffaloHotImage from "../../assets/images/flavors/buffalo-hot.png";
+import BoogieBBQImage from "../../assets/images/flavors/boogie-bbq.png";
+import ChickenLickinImage from "../../assets/images/flavors/honey-mustard.png";
+import FunkadelicFireImage from "../../assets/images/flavors/funkadelic-fire.png";
+import GroovyGarlicImage from "../../assets/images/flavors/groovy-garlic.png";
+import JivinJerkImage from "../../assets/images/flavors/jivin-jerk.png";
+import DiscoInfernoImage from "../../assets/images/flavors/disco-inferno.png";
+import SoulfulSrirachaImage from "../../assets/images/flavors/soulful-sriracha.png";
+import PsychedelicPineappleImage from "../../assets/images/flavors/psychedelic-pineapple.png";
 
 // This will be replaced by Sanity data later
 const HEAT_SCALE = [
-  { label: 'Mild', value: 1 },
-  { label: 'Warm', value: 2 },
-  { label: 'Medium', value: 3 },
-  { label: 'Hot', value: 4 },
-  { label: 'Blazing', value: 5 },
-]
+  { label: "Mild", value: 1 },
+  { label: "Warm", value: 2 },
+  { label: "Medium", value: 3 },
+  { label: "Hot", value: 4 },
+  { label: "Blazing", value: 5 },
+];
 
 // This will be replaced by Sanity data later
 const FLAVORS = [
@@ -29,6 +29,7 @@ const FLAVORS = [
     imageUrl: BuffaloHotImage,
     borderColor: "gold",
     heat: 3,
+    type: "wet",
   },
   {
     name: "Boogie BBQ",
@@ -36,6 +37,7 @@ const FLAVORS = [
     imageUrl: BoogieBBQImage,
     borderColor: "pink",
     heat: 2,
+    type: "wet",
   },
   {
     name: "Chicken Lickin'",
@@ -43,6 +45,7 @@ const FLAVORS = [
     imageUrl: ChickenLickinImage,
     borderColor: "teal",
     heat: 2,
+    type: "wet",
   },
   {
     name: "Funkadelic Fire",
@@ -50,6 +53,7 @@ const FLAVORS = [
     imageUrl: FunkadelicFireImage,
     borderColor: "pink",
     heat: 5,
+    type: "wet",
   },
   {
     name: "Groovy Garlic",
@@ -57,6 +61,7 @@ const FLAVORS = [
     imageUrl: GroovyGarlicImage,
     borderColor: "teal",
     heat: 2,
+    type: "wet",
   },
   {
     name: "Jivin’ Jerk",
@@ -64,80 +69,163 @@ const FLAVORS = [
     imageUrl: JivinJerkImage,
     borderColor: "gold",
     heat: 3,
+    type: "dry",
   },
   {
-    name:"Disco Inferno",
-    description:"Extremely hot sauce for the daring",
-    imageUrl:DiscoInfernoImage,
-    borderColor:"purple",
-    heat:5,
+    name: "Disco Inferno",
+    description: "Extremely hot sauce for the daring",
+    imageUrl: DiscoInfernoImage,
+    borderColor: "purple",
+    heat: 5,
+    type: "wet",
   },
-  { 
-    name:"Soulful Sriracha",
-    description:"Tangy and spicy with a kick",
-    imageUrl:SoulfulSrirachaImage,
-    borderColor:"purple",
-    heat:4,
+  {
+    name: "Soulful Sriracha",
+    description: "Tangy and spicy with a kick",
+    imageUrl: SoulfulSrirachaImage,
+    borderColor: "purple",
+    heat: 4,
+    type: "wet",
   },
-  { 
-    name:"Psychedelic Pineapple",
-    description:"Sweet and spicy tropical blend",
-    imageUrl:PsychedelicPineappleImage,
-    borderColor:"pink",
-    heat:1,
+  {
+    name: "Psychedelic Pineapple",
+    description: "Sweet and spicy tropical blend",
+    imageUrl: PsychedelicPineappleImage,
+    borderColor: "pink",
+    heat: 1,
+    type: "dry",
   },
 ];
 
 export default function FlavorsPage() {
-  const [maxHeat, setMaxHeat] = useState(HEAT_SCALE[HEAT_SCALE.length - 1].value)
-  const visibleFlavors = useMemo(
-    () => FLAVORS.filter(flavor => flavor.heat <= maxHeat),
-    [maxHeat]
-  )
-  const currentHeatLabel =
-    HEAT_SCALE.find(step => step.value === maxHeat)?.label ?? HEAT_SCALE[HEAT_SCALE.length - 1].label
+  // Manage state for heat range
+  const [minHeat, setMinHeat] = useState(1);
+  const [maxHeat, setMaxHeat] = useState(5);
+
+  // Manage state for flavor type
+  const [flavorType, setFlavorType] = useState<"all" | "wet" | "dry">("all");
+
+  // Filter flavor list with all conditions
+  const visibleFlavors = useMemo(() => {
+    return FLAVORS.filter((flavor) => {
+      const withinHeat = flavor.heat >= minHeat && flavor.heat <= maxHeat;
+      const matchesType = flavorType === "all" || flavor.type === flavorType;
+      return withinHeat && matchesType;
+    });
+  }, [minHeat, maxHeat, flavorType]);
+
+  // const currentHeatLabel =
+  //   HEAT_SCALE.find(step => step.value === maxHeat)?.label ?? HEAT_SCALE[HEAT_SCALE.length - 1].label
 
   return (
     <div className={styles.pageWrapper}>
-        <h1 className={styles.pageHeading}>Find Your Flavor</h1>
-      <p className="textCenter">Kick up the flavor on any of our classic wings, boneless wings, or crispy tenders!</p>
+      <h1 className={styles.pageHeading}>Find Your Flavor</h1>
+      <p>
+        Kick up the flavor on any of our classic wings, boneless wings, or
+        crispy tenders!
+      </p>
+
+      {/* ---------------- HEAT SCALE FILTER ---------------- */}
       <section className={styles.heatScaleSection}>
         <h2>Heat Scale</h2>
-        <p>Showing flavors up to: <strong className='pinkText'>{currentHeatLabel}</strong></p>
-        <input
-          type="range"
-          min={HEAT_SCALE[0].value}
-          max={HEAT_SCALE[HEAT_SCALE.length - 1].value}
-          value={maxHeat}
-          onChange={event => setMaxHeat(Number(event.target.value))}
-          style={{ width: '100%' }}
-        />
-        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
-          {HEAT_SCALE.map(step => (
+
+        <div className={styles.dualSliderWrapper}>
+          {/* MIN SLIDER HANDLE */}
+          <div className={`${styles.sliderLayer}`}>
+            <input
+              type="range"
+              min="1"
+              max="5"
+              value={minHeat}
+              onChange={(e) => {
+                const value = Number(e.target.value);
+                if (value <= maxHeat) setMinHeat(value);
+              }}
+              className={styles.sliderInput}
+            />
+          </div>
+
+          {/* MAX SLIDER HANDLE */}
+          <div className={`${styles.sliderLayer}`}>
+            <input
+              type="range"
+              min="1"
+              max="5"
+              value={maxHeat}
+              onChange={(e) => {
+                const value = Number(e.target.value);
+                if (value >= minHeat) setMaxHeat(value);
+              }}
+              className={styles.sliderInput}
+            />
+          </div>
+        </div>
+
+        <div className={styles.heatLabels}>
+          {HEAT_SCALE.map((step) => (
             <span key={step.value}>{step.label}</span>
           ))}
         </div>
+
+        {/* <p>
+        Showing heat range:{" "}
+        <strong className="pinkText">
+          {minHeat} – {maxHeat}
+        </strong>
+        </p> */}
+
+        {/* ---------------- WET / DRY TOGGLE ---------------- */}
+        <div className={styles.flavorTypeSection}>
+          <h2>Flavor Type</h2>
+
+          <div className={styles.typeToggle}>
+            <button
+              className={flavorType === "all" ? styles.activeToggle : ""}
+              onClick={() => setFlavorType("all")}
+            >
+              All
+            </button>
+            <button
+              className={flavorType === "wet" ? styles.activeToggle : ""}
+              onClick={() => setFlavorType("wet")}
+            >
+              Wet
+            </button>
+            <button
+              className={flavorType === "dry" ? styles.activeToggle : ""}
+              onClick={() => setFlavorType("dry")}
+            >
+              Dry
+            </button>
+          </div>
+        </div>
       </section>
 
+      {/* ---------------- FLAVORS GRID ---------------- */}
       <section>
-        <h2>Flavors</h2>
+        <h2>
+          Flavors {visibleFlavors.length ? `(${visibleFlavors.length})` : ""}
+        </h2>
+
         {visibleFlavors.length === 0 ? (
-          <p>No flavors match that heat level. Try sliding the scale hotter.</p>
+          <p>
+            No flavors match those filters. Try adjusting the slider or flavor
+            type.
+          </p>
         ) : (
           <div className={styles.grid}>
-            {visibleFlavors.map(flavor => (
-               <FlavorCard
-              key={flavor.name}
-              name={flavor.name}
-              description={flavor.description}
-              imageUrl={flavor.imageUrl}
-              borderColor={flavor.borderColor as any}
-            />
-      
+            {visibleFlavors.map((flavor) => (
+              <FlavorCard
+                key={flavor.name}
+                name={flavor.name}
+                description={flavor.description}
+                imageUrl={flavor.imageUrl}
+                borderColor={flavor.borderColor as any}
+              />
             ))}
           </div>
         )}
       </section>
     </div>
-  )
+  );
 }
