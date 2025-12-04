@@ -1,12 +1,15 @@
 import React, { useMemo, useState } from 'react'
 import { FlavorCard} from '../components/FlavorCard/FlavorCard'
 
-import BuffaloHotImage from '../assets/images/flavors/buffalo.png'
-// import BoogieBBQImage from '../assets/images/flavors/boogie-bbq.png'
-// import ChickenLickinImage from '../assets/images/flavors/honey.png'
-// import FunkadelicFireImage from '../assets/images/flavors/fire.png'
-// import GroovyGarlicImage from '../assets/images/flavors/garlic.png'
-// import JivinJerkImage from '../assets/images/flavors/jerk.png'
+import BuffaloHotImage from '../assets/images/flavors/buffalo-hot.png'
+import BoogieBBQImage from '../assets/images/flavors/boogie-bbq.png'
+import ChickenLickinImage from '../assets/images/flavors/honey-mustard.png'
+import FunkadelicFireImage from '../assets/images/flavors/funkadelic-fire.png'
+import GroovyGarlicImage from '../assets/images/flavors/groovy-garlic.png'
+import JivinJerkImage from '../assets/images/flavors/jivin-jerk.png'
+import DiscoInfernoImage from '../assets/images/flavors/disco-inferno.png'
+import SoulfulSrirachaImage from '../assets/images/flavors/soulful-sriracha.png'
+import PsychedelicPineappleImage from '../assets/images/flavors/psychedelic-pineapple.png'
 
 const HEAT_SCALE = [
   { label: 'Mild', value: 1 },
@@ -37,56 +40,56 @@ const FLAVORS = [
   {
     name: "Boogie BBQ",
     description: "Smoky goodness with a hint of sweet",
-    // imageUrl: BoogieBBQImage,
+    imageUrl: BoogieBBQImage,
     borderColor: "pink",
     heat: 2,
   },
   {
     name: "Chicken Lickin'",
     description: "Honey mustard perfection",
-    // imageUrl: ChickenLickinImage,
+    imageUrl: ChickenLickinImage,
     borderColor: "teal",
     heat: 2,
   },
   {
     name: "Funkadelic Fire",
     description: "Turn up the heat and get down!",
-    // imageUrl: FunkadelicFireImage,  
+    imageUrl: FunkadelicFireImage,
     borderColor: "pink",
     heat: 4,
   },
   {
     name: "Groovy Garlic",
     description: "Savory garlic with an herbal flair",
-    // imageUrl: GroovyGarlicImage,
+    imageUrl: GroovyGarlicImage,
     borderColor: "teal",
     heat: 2,
   },
   {
     name: "Jivin’ Jerk",
     description: "Bold and spicy Caribbean flavor",
-    // imageUrl: JivinJerkImage, 
+    imageUrl: JivinJerkImage,
     borderColor: "gold",
     heat: 3,
   },
   {
     name:"Disco Inferno",
     description:"Extremely hot sauce for the daring",
-    // imageUrl:BuffaloHotImage,
+    imageUrl:DiscoInfernoImage,
     borderColor:"purple",
     heat:5,
   },
   { 
     name:"Soulful Sriracha",
     description:"Tangy and spicy with a kick",
-    // imageUrl:BoogieBBQImage,
+    imageUrl:SoulfulSrirachaImage,
     borderColor:"purple",
     heat:4,
   },
   { 
     name:"Psychedelic Pineapple",
     description:"Sweet and spicy tropical blend",
-    // imageUrl:ChickenLickinImage,
+    imageUrl:PsychedelicPineappleImage,
     borderColor:"pink",
     heat:3,
   },
