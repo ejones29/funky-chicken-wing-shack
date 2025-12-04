@@ -1,5 +1,6 @@
 .section {
   padding: 24px var(--gap-page) 32px;
+  margin-bottom: 32px;
 }
 
 .headerRow {
@@ -12,7 +13,7 @@
 
 .heading {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 800;
   color: var(--color-accent-gold);
   text-transform: uppercase;

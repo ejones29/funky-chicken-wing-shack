@@ -1,71 +1,93 @@
 .nav {
   position: fixed;
-  left: 0;
   bottom: 0;
+  left: 0;
   width: 100%;
-  backdrop-filter: blur(12px);
-  background: linear-gradient(
-    180deg,
-    rgba(10, 0, 20, 0.6),
-    rgba(0, 0, 0, 0.9)
-  );
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  z-index: 40;
-}
+  height: 62px;
 
-.inner {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 6px 10px;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 18px 18px 0 0;
+
+  background: var(--color-nav-bg);
+  box-shadow: 0 -3px 14px rgba(0, 0, 0, 0.25);
+
+  z-index: 100;
+
+  /* hide when desktop */
 }
 
-.tab {
+@media (min-width: 1200px) {
+  .nav {
+    display: none;
+  }
+}
+
+/* Theme colors */
+:root {
+  --color-nav-bg: #ffffff;
+  --color-nav-icon: #222;
+  --color-nav-active: #ffb400;
+}
+
+[data-theme="dark"] {
+  --color-nav-bg: #000c19;
+  --color-nav-icon: #ddd;
+  --color-nav-active: #ffc700;
+}
+
+/* layout */
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 90%;
+  max-width: 800px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.item {
+  flex: 1;
+  text-align: center;
+}
+
+.button {
+  width: 100%;
   background: none;
   border: none;
-  padding: 6px 10px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.7rem;
+
+  padding: 6px;
+  color: var(--color-nav-icon);
+
+  font-size: 0.75rem;
+
   transition: color 0.15s ease, transform 0.15s ease;
 }
 
-.tab:hover {
-  color: var(--color-primary-pink);
-  transform: translateY(-1px);
+.button:hover {
+  transform: translateY(-2px);
 }
 
-.tabActive {
-  color: var(--color-primary-teal);
+.active {
+  color: var(--color-nav-active);
 }
 
 .icon {
   font-size: 1.4rem;
-  line-height: 1;
 }
 
 .label {
-  letter-spacing: 0.04em;
+  margin-top: 2px;
+  font-size: 0.65rem;
   text-transform: uppercase;
-}
-
-@media (min-width: 768px) {
-  .inner {
-    justify-content: center;
-    gap: 40px;
-  }
-
-  .tab {
-    flex-direction: row;
-    font-size: 0.8rem;
-  }
-
-  .label {
-    margin-left: 4px;
-  }
+  letter-spacing: 0.06em;
 }

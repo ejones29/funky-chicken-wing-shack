@@ -1,7 +1,9 @@
 import React from "react";
 import * as styles from "./FeaturedSpecials.module.css";
 import { SpecialCard } from "../SpecialCard/SpecialCard";
-
+import BoogieBBQBucket from "../../assets/images/boogie-bbq-bucket.png";
+import FunkadelicFireWings from "../../assets/images/funkadelic-fire-wings.png";
+import CluckinLoadedFries from "../../assets/images/cluckin-loaded-fries.png";
 interface Special {
   title: string;
   image: string;
@@ -10,15 +12,15 @@ interface Special {
 const specials: Special[] = [
   {
     title: "Boogie BBQ Bucket",
-    image: "/images/specials/boogie-bucket.png",
+    image: BoogieBBQBucket,
   },
   {
     title: "Funkadelic Fire Wings",
-    image: "/images/specials/funk-fire.png",
+    image: FunkadelicFireWings,
   },
   {
-    title: "Cluckin' Loaded",
-    image: "/images/specials/cluck-loaded.png",
+    title: "Cluckin' Loaded Fries",
+    image: CluckinLoadedFries,
   },
 ];
 
