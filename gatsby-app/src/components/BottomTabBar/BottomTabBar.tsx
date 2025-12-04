@@ -16,21 +16,19 @@ const tabs: TabItem[] = [
 
 export const BottomTabBar: React.FC = () => {
   return (
-    <nav className={styles.nav} aria-label="Main navigation">
-      <div className={styles.inner}>
-        {tabs.map((tab) => (
-          <button
-            key={tab.label}
-            type="button"
-            className={`${styles.tab} ${
-              tab.isActive ? styles.tabActive : ""
-            }`}
-          >
-            <span className={styles.icon}>{tab.icon}</span>
-            <span className={styles.label}>{tab.label}</span>
-          </button>
+    <nav className={styles.nav} aria-label="Mobile navigation">
+      <ul className={styles.list}>
+        {tabs.map((t) => (
+          <li key={t.label} className={styles.item}>
+            <button
+              className={`${styles.button} ${t.active ? styles.active : ""}`}
+            >
+              <span className={styles.icon}>{t.icon}</span>
+              <span className={styles.label}>{t.label}</span>
+            </button>
+          </li>
         ))}
-      </div>
+      </ul>
     </nav>
   );
 };

@@ -64,6 +64,51 @@
   --bp-tablet-lg: 900px;
   --bp-laptop: 1024px;
   --bp-desktop: 1200px;
+
+  /* BACKGROUNDS */
+  /* Light theme (default)*/
+  --bg-base-gradient: linear-gradient(
+    180deg,
+    #4a006b,
+    #2b0044,
+    #0d001a
+  );
+
+  --bg-glow-top: radial-gradient(
+    circle at top right,
+    rgba(255, 63, 188, 0.35),
+    transparent 60%
+  );
+
+  --bg-glow-bottom: radial-gradient(
+    circle at bottom left,
+    rgba(255, 176, 64, 0.35),
+    transparent 60%
+  );
+}
+
+/* Dark theme (Automatic if device prefers dark mode) */
+  @media (prefers-color-scheme: dark) {
+  :root {
+    --bg-base-gradient: linear-gradient(
+      180deg,
+      #00152f,
+      #00091a,
+      #000000
+    );
+
+    --bg-glow-top: radial-gradient(
+      circle at top right,
+      rgba(60, 243, 255, 0.32),
+      transparent 60%
+    );
+
+    --bg-glow-bottom: radial-gradient(
+      circle at bottom left,
+      rgba(255, 199, 0, 0.28),
+      transparent 60%
+    );
+  }
 }
 
 @media (min-width: var(--bp-tablet)) {

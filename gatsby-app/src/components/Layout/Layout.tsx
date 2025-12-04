@@ -1,12 +1,13 @@
 import React from "react"
 import * as styles from "./Layout.module.css"
-import { NavWrapper} from "../NavWrapper/NavWrapper"
+import { PageBackground } from "../PageBackground/PageBackground"
 import Footer from "../Footer/Footer"
 import Header from "../Header/Header"
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <main>
+      <PageBackground>
       <div className={styles.container}>
         <div className="content">
           <Header />
@@ -14,6 +15,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <Footer />
         </div>
       </div>
+      </PageBackground> 
     </main>
   )
 }

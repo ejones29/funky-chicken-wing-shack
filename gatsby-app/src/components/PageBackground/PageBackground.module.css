@@ -1,0 +1,27 @@
+/* Wrapper establishes stacking context */
+.wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* Background (fixed neon glow + vertical gradient) */
+.background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  /* Use theme variables */
+  background:
+    var(--bg-glow-top),
+    var(--bg-glow-bottom),
+    var(--bg-base-gradient);
+}
+
+/* Content area sits above everything */
+.content {
+  position: relative;
+  z-index: 1;
+}
