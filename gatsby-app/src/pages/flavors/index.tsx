@@ -1,16 +1,18 @@
 import React, { useMemo, useState } from 'react'
-import { FlavorCard} from '../components/FlavorCard/FlavorCard'
+import * as styles from './flavors.module.css'
+import { FlavorCard} from '../../components/FlavorCard/FlavorCard'
 
-import BuffaloHotImage from '../assets/images/flavors/buffalo-hot.png'
-import BoogieBBQImage from '../assets/images/flavors/boogie-bbq.png'
-import ChickenLickinImage from '../assets/images/flavors/honey-mustard.png'
-import FunkadelicFireImage from '../assets/images/flavors/funkadelic-fire.png'
-import GroovyGarlicImage from '../assets/images/flavors/groovy-garlic.png'
-import JivinJerkImage from '../assets/images/flavors/jivin-jerk.png'
-import DiscoInfernoImage from '../assets/images/flavors/disco-inferno.png'
-import SoulfulSrirachaImage from '../assets/images/flavors/soulful-sriracha.png'
-import PsychedelicPineappleImage from '../assets/images/flavors/psychedelic-pineapple.png'
+import BuffaloHotImage from '../../assets/images/flavors/buffalo-hot.png'
+import BoogieBBQImage from '../../assets/images/flavors/boogie-bbq.png'
+import ChickenLickinImage from '../../assets/images/flavors/honey-mustard.png'
+import FunkadelicFireImage from '../../assets/images/flavors/funkadelic-fire.png'
+import GroovyGarlicImage from '../../assets/images/flavors/groovy-garlic.png'
+import JivinJerkImage from '../../assets/images/flavors/jivin-jerk.png'
+import DiscoInfernoImage from '../../assets/images/flavors/disco-inferno.png'
+import SoulfulSrirachaImage from '../../assets/images/flavors/soulful-sriracha.png'
+import PsychedelicPineappleImage from '../../assets/images/flavors/psychedelic-pineapple.png'
 
+// This will be replaced by Sanity data later
 const HEAT_SCALE = [
   { label: 'Mild', value: 1 },
   { label: 'Warm', value: 2 },
@@ -18,15 +20,6 @@ const HEAT_SCALE = [
   { label: 'Hot', value: 4 },
   { label: 'Blazing', value: 5 },
 ]
-
-// const FLAVORS = [
-//   { name: 'Lemon Pepper', heat: 1, description: 'Citrus zest with cracked pepper bite.' },
-//   { name: 'Garlic Parmesan', heat: 2, description: 'Creamy garlic with parmesan finish.' },
-//   { name: 'Honey BBQ', heat: 2, description: 'Sweet, smoky, and crowd friendly.' },
-//   { name: 'Cajun Kick', heat: 3, description: 'Herby rub with creeping warmth.' },
-//   { name: 'Mango Habanero', heat: 4, description: 'Tropical sweetness that turns up the heat.' },
-//   { name: 'Inferno Blaze', heat: 5, description: 'Scorching pepper blend for heat seekers.' },
-// ]
 
 // This will be replaced by Sanity data later
 const FLAVORS = [
@@ -56,7 +49,7 @@ const FLAVORS = [
     description: "Turn up the heat and get down!",
     imageUrl: FunkadelicFireImage,
     borderColor: "pink",
-    heat: 4,
+    heat: 5,
   },
   {
     name: "Groovy Garlic",
@@ -91,7 +84,7 @@ const FLAVORS = [
     description:"Sweet and spicy tropical blend",
     imageUrl:PsychedelicPineappleImage,
     borderColor:"pink",
-    heat:3,
+    heat:1,
   },
 ];
 
@@ -105,12 +98,12 @@ export default function FlavorsPage() {
     HEAT_SCALE.find(step => step.value === maxHeat)?.label ?? HEAT_SCALE[HEAT_SCALE.length - 1].label
 
   return (
-    <div className="pageWrapper">
-        <h1 className="pageHeading">Find Your Flavor</h1>
+    <div className={styles.pageWrapper}>
+        <h1 className={styles.pageHeading}>Find Your Flavor</h1>
       <p className="textCenter">Kick up the flavor on any of our classic wings, boneless wings, or crispy tenders!</p>
-      <section className={"heatScaleSection"}>
+      <section className={styles.heatScaleSection}>
         <h2>Heat Scale</h2>
-        <p className="textCenter">Showing flavors up to: <strong>{currentHeatLabel}</strong></p>
+        <p>Showing flavors up to: <strong className='pinkText'>{currentHeatLabel}</strong></p>
         <input
           type="range"
           min={HEAT_SCALE[0].value}
@@ -131,7 +124,7 @@ export default function FlavorsPage() {
         {visibleFlavors.length === 0 ? (
           <p>No flavors match that heat level. Try sliding the scale hotter.</p>
         ) : (
-          <div className="grid">
+          <div className={styles.grid}>
             {visibleFlavors.map(flavor => (
                <FlavorCard
               key={flavor.name}

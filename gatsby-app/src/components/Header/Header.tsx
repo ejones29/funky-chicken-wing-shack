@@ -5,11 +5,11 @@ import { HeaderNav } from "../HeaderNav/HeaderNav";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 export default function Header() {
-  const isDesktop = useMediaQuery("(min-width: 1200px)");
+  const isLaptopBp = useMediaQuery("(min-width: 1024px)");
   return (
     <header className={styles.header}>
       <Logo />
-      {isDesktop && <HeaderNav />}
+      {isLaptopBp && <HeaderNav />}
     </header>
   );
 }
