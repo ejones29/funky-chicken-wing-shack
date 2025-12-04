@@ -1,5 +1,6 @@
 import React from "react";
 import * as styles from "./BottomTabBar.module.css";
+import { Link } from "gatsby";
 
 interface TabItem {
   label: string;
@@ -10,7 +11,6 @@ interface TabItem {
 const tabs: TabItem[] = [
   { label: "Home", icon: "🏠", isActive: true },
   { label: "Menu", icon: "📋" },
-  { label: "Cart", icon: "🛒" },
   { label: "Account", icon: "👤" },
 ];
 
@@ -20,12 +20,10 @@ export const BottomTabBar: React.FC = () => {
       <ul className={styles.list}>
         {tabs.map((t) => (
           <li key={t.label} className={styles.item}>
-            <button
-              className={`${styles.button} ${t.active ? styles.active : ""}`}
-            >
+            <Link to={`/${t.label.toLowerCase()}`} className={`${styles.button} ${t.isActive ? styles.active : ""}`}>
               <span className={styles.icon}>{t.icon}</span>
               <span className={styles.label}>{t.label}</span>
-            </button>
+            </Link>
           </li>
         ))}
       </ul>

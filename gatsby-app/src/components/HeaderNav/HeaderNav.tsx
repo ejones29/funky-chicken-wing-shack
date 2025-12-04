@@ -2,9 +2,8 @@
 import React from 'react'
 import {Link} from 'gatsby'
 import * as styles from './HeaderNav.module.css'
-import Logo from '../Logo/Logo'
 
-const links = ["Home", "Menu", "Account", "Cart" ];
+const links = ["Menu", "Flavors", "Account", "Cart" ];
 
 export const HeaderNav: React.FC = () => {
   return (
@@ -13,11 +12,9 @@ export const HeaderNav: React.FC = () => {
         <nav>
           <ul className={styles.navList}>
             {links.map((link) => (
-              <li key={link}>
-                <a href="#" className={styles.navItem}>
-                  {link}
-                </a>
-              </li>
+              <Link to={`/${link.toLowerCase()}`} key={link} className={styles.navItem}>
+                {link}
+              </Link>
             ))}
           </ul>
         </nav>
