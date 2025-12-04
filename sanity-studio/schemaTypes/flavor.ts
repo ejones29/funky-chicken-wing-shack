@@ -59,3 +59,5 @@ export const flavor = defineType({
     },
   ],
 })
+
+export default flavor
