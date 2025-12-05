@@ -8,7 +8,7 @@
   justify-content: center;
   align-items: center;
   border-top: 1px solid rgba(0, 0, 0, 0.08);
-  background: var(--color-nav-bg);
+  background: radial-gradient(circle at top, #3b0b5d, #14001f);
   box-shadow: 0 -3px 14px rgba(0, 0, 0, 0.25);
   z-index: 100;
 }
