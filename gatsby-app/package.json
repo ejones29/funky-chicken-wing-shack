@@ -1,6 +1,9 @@
 {
   "name": "gatsby-app",
   "version": "1.0.0",
+  "engines": {
+    "node": "<=v22.21.1"
+  },
   "private": true,
   "description": "gatsby-app",
   "author": "ejones29",

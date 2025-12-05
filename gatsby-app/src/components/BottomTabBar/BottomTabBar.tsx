@@ -19,7 +19,7 @@ const tabs: TabItem[] = [
 
 export const BottomTabBar: React.FC = () => {
   return (
-    <nav className={styles.nav} aria-label="Mobile navigation">
+    <nav className={styles.bottomBarNav} aria-label="Mobile navigation">
       <ul className={styles.list}>
         {tabs.map((item) => (
           <li key={item.label} className={styles.item}>
