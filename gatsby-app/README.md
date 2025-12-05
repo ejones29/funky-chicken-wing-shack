@@ -72,25 +72,6 @@ The **Funky Chicken** brand uses:
 
 ---
 
-## 📱 Responsive Navigation
-
-### Mobile (< 1200px)
-
-**Bottom Tab Bar** with:
-
-- Home
-- Menu
-- Account
-
-Active tab includes neon glow animation and filled icon version.
-
-### Desktop (≥ 1200px)
-
-- Hidden Bottom Tab Bar
-- Header navigation with logo and menu links
-
----
-
 ## 🌶 Features
 
 ### Flavor Explorer
@@ -112,31 +93,6 @@ A fully interactive screen featuring:
 - Light/dark backgrounds based on `prefers-color-scheme`
 - Neon radial gradients
 - Reusable across pages
-
----
-
-## 📂 Project Structure (high-level)
-
-```
-src/
-  components/
-    ActionButton/
-    BottomTabBar/
-    FlavorCard/
-    Header/
-    PageBackground/
-    Icons/ (custom SVGs)
-  pages/
-    index.tsx
-    menu.tsx
-    flavors.tsx
-    account.tsx
-  assets/
-    images/
-    icons/
-  styles/
-  sanity/
-```
 
 ---
 
