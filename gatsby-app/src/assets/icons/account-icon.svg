@@ -1,0 +1,40 @@
+<svg
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-label="Account"
+>
+  <defs>
+    <linearGradient id="accountOutlineGradient" x1="4" y1="4" x2="20" y2="20">
+      <stop offset="0%" stop-color="#FFC700" />
+      <stop offset="100%" stop-color="#FF7A2F" />
+    </linearGradient>
+    <filter id="accountOutlineGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <circle
+    cx="12"
+    cy="8"
+    r="3.5"
+    fill="none"
+    stroke="url(#accountOutlineGradient)"
+    stroke-width="1.8"
+    filter="url(#accountOutlineGlow)"
+  />
+  <path
+    d="M5 19C5.5 15.5 8.4 14 12 14C15.6 14 18.5 15.5 19 19"
+    fill="none"
+    stroke="url(#accountOutlineGradient)"
+    stroke-width="1.8"
+    stroke-linecap="round"
+    filter="url(#accountOutlineGlow)"
+  />
+</svg>

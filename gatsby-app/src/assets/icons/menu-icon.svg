@@ -1,0 +1,29 @@
+<svg
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-label="Menu Filled"
+>
+  <defs>
+    <linearGradient id="menuFillGradient" x1="4" y1="4" x2="20" y2="20">
+      <stop offset="0%" stop-color="#FFC700" />
+      <stop offset="100%" stop-color="#FF7A2F" />
+    </linearGradient>
+    <filter id="menuFillGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.2" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect x="3.5" y="5.5" width="17" height="3" rx="1.5"
+    fill="url(#menuFillGradient)" filter="url(#menuFillGlow)" />
+  <rect x="3.5" y="10.5" width="17" height="3" rx="1.5"
+    fill="url(#menuFillGradient)" filter="url(#menuFillGlow)" />
+  <rect x="3.5" y="15.5" width="17" height="3" rx="1.5"
+    fill="url(#menuFillGradient)" filter="url(#menuFillGlow)" />
+</svg>

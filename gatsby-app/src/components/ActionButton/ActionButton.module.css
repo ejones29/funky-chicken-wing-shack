@@ -24,6 +24,10 @@
   transform: translateY(0);
 }
 
+a {
+  text-decoration: none;
+}
+
 .pink {
   border-color: var(--color-primary-pink);
   color: var(--color-primary-pink);

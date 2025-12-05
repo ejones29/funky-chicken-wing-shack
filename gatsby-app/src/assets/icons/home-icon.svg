@@ -1,0 +1,32 @@
+<svg
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-label="Home"
+>
+  <defs>
+    <linearGradient id="homeOutlineGradient" x1="4" y1="4" x2="20" y2="20">
+      <stop offset="0%" stop-color="#FFC700" />
+      <stop offset="100%" stop-color="#FF7A2F" />
+    </linearGradient>
+    <filter id="homeOutlineGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <path
+    d="M4 11L12 4L20 11V19C20 19.5523 19.5523 20 19 20H15C14.4477 20 14 19.5523 14 19V15H10V19C10 19.5523 9.55228 20 9 20H5C4.44772 20 4 19.5523 4 19V11Z"
+    fill="none"
+    stroke="url(#homeOutlineGradient)"
+    stroke-width="1.8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    filter="url(#homeOutlineGlow)"
+  />
+</svg>
