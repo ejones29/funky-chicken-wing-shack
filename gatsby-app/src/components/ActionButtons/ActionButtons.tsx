@@ -9,12 +9,19 @@ export const ActionButtons: React.FC = () => {
       <div className={styles.grid}>
         <ActionButton
           as={Link}
-          label="Find Your Flavor"
-          variant="pink"
-          icon="🔥"
-          to="/flavors"
+          label="Order Now"
+          variant="teal"
+          to="/order"
+          icon="🍗"
         />
         <ActionButton
+          as={Link}
+          label="Find Your Flavor"
+          variant="pink"
+          to="/flavors"
+          icon="🔥"
+        />
+        {/* <ActionButton
           label="Meal Combos"
           variant="pink"
           onClick={() => {}}
@@ -31,7 +38,7 @@ export const ActionButtons: React.FC = () => {
           variant="teal"
           onClick={() => {}}
           icon="🛵"
-        />
+        /> */}
       </div>
     </section>
   );
