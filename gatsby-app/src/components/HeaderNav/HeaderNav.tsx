@@ -1,9 +1,8 @@
+import React from "react";
+import { Link } from "gatsby";
+import * as styles from "./HeaderNav.module.css";
 
-import React from 'react'
-import {Link} from 'gatsby'
-import * as styles from './HeaderNav.module.css'
-
-const links = ["Menu", "Flavors", "Account", "Cart" ];
+const links = ["Menu", "Flavors"];
 
 export const HeaderNav: React.FC = () => {
   return (
@@ -12,7 +11,11 @@ export const HeaderNav: React.FC = () => {
         <nav>
           <ul className={styles.navList}>
             {links.map((link) => (
-              <Link to={`/${link.toLowerCase()}`} key={link} className={styles.navItem}>
+              <Link
+                to={`/${link.toLowerCase()}`}
+                key={link}
+                className={styles.navItem}
+              >
                 {link}
               </Link>
             ))}

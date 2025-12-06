@@ -6,7 +6,7 @@ export interface ActionButtonProps {
   label: string;
   icon?: React.ReactNode;
   variant?: "pink" | "teal";
-  as?: React.ElementType; // allows swapping the tag/component
+  as?: "button" | "a" | "link";
   to?: string; // for Gatsby <Link>
   href?: string; // for <a>
   onClick?: () => void;
@@ -32,7 +32,7 @@ export const ActionButton: React.FC<ActionButtonProps> = ({
   };
 
   // Support Gatsby's <Link>
-  if (Component === Link && to) {
+  if (Component === "link" && to) {
     elementProps.to = to;
   }
 
@@ -41,10 +41,28 @@ export const ActionButton: React.FC<ActionButtonProps> = ({
     elementProps.href = href;
   }
 
-  return (
-    <Component {...elementProps}>
+  const content = (
+    <>
       {icon && <span className={styles.icon}>{icon}</span>}
       <span className={styles.label}>{label}</span>
-    </Component>
+    </>
   );
+
+  if (Component === "link" && to) {
+    return (
+      <Link {...elementProps} to={to}>
+        {content}
+      </Link>
+    );
+  }
+
+  if (Component === "a" && href) {
+    return (
+      <a {...elementProps} href={href}>
+        {content}
+      </a>
+    );
+  }
+
+  return <button {...elementProps}>{content}</button>;
 };

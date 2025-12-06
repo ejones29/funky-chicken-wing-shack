@@ -1,6 +1,6 @@
 import React from "react";
 import * as styles from "./FlavorCard.module.css";
-
+import { ActionButton } from "../ActionButton/ActionButton";
 export interface FlavorCardProps {
   name: string;
   description: string;
@@ -21,6 +21,7 @@ export const FlavorCard: React.FC<FlavorCardProps> = ({
       </div>
       <h3 className={styles.title}>{name}</h3>
       <p className={styles.desc}>{description}</p>
+      <ActionButton label="Order Now" to="/order" as="link" />
     </div>
   );
 };

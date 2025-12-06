@@ -1,0 +1,112 @@
+/* -------------------------------
+   FORM WRAPPER
+--------------------------------*/
+form {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1rem 0;
+  color: white;
+}
+
+/* -------------------------------
+   FIELDSET + LEGEND
+--------------------------------*/
+fieldset {
+  border: 2px solid rgba(255, 199, 0, 0.5); /* neon gold */
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+}
+
+legend {
+  padding: 0 10px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #ffc700; /* neon gold */
+  text-shadow: 0 0 8px rgba(255, 199, 0, 0.7);
+}
+
+/* -------------------------------
+   LABELS
+--------------------------------*/
+label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2rem;
+  font-weight: 600;
+  color: #ffebf8;
+}
+
+/* -------------------------------
+   INPUTS
+--------------------------------*/
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="tel"] {
+  margin-top: 0.4rem;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(15, 15, 25, 0.85);
+  color: #fff;
+  transition: all 0.2s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #ff7a2f; /* neon orange */
+  box-shadow: 0 0 10px rgba(255, 122, 47, 0.7);
+}
+
+/* -------------------------------
+   SUBMIT BUTTON (Place Order)
+--------------------------------*/
+button[type="submit"] {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 1rem 1.2rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ffc700, #ff7a2f);
+  color: #000;
+  transition: all 0.2s ease;
+  text-shadow: none;
+  box-shadow: 0 4px 15px rgba(255, 122, 47, 0.5);
+}
+
+button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 122, 47, 0.7);
+}
+
+button[type="submit"]:active {
+  transform: scale(0.97);
+}
+
+/* -------------------------------
+   FORM RESPONSIVE STYLING
+--------------------------------*/
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  form {
+    padding: 1rem;
+  }
+
+  fieldset {
+    padding: 1rem;
+  }
+
+  button[type="submit"] {
+    font-size: 1.15rem;
+  }
+}

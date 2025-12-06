@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import * as pageStyles from "./pages.module.css";
 import useForm from "../hooks/useForm";
 
 export default function OrderPage() {
@@ -9,7 +9,7 @@ export default function OrderPage() {
   });
   return (
     <>
-      <h1>Order</h1>
+      <h1 className={pageStyles.pageHeading}>Order</h1>
       <form>
         <fieldset>
           <legend>Customer Information</legend>

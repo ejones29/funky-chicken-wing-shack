@@ -1,21 +1,20 @@
 import React from "react";
 import * as styles from "./ActionButtons.module.css";
 import { ActionButton } from "../../components/ActionButton/ActionButton";
-import { Link } from "gatsby";
 
 export const ActionButtons: React.FC = () => {
   return (
     <section className={styles.section} aria-label="Quick actions">
       <div className={styles.grid}>
         <ActionButton
-          as={Link}
+          as="link"
           label="Order Now"
           variant="teal"
           to="/order"
           icon="🍗"
         />
         <ActionButton
-          as={Link}
+          as="link"
           label="Find Your Flavor"
           variant="pink"
           to="/flavors"

@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import * as styles from "./flavors.module.css";
+import * as pageStyles from "../pages.module.css";
 import { FlavorCard } from "../../components/FlavorCard/FlavorCard";
 
 import BuffaloHotImage from "../../assets/images/flavors/buffalo-hot.png";
@@ -118,11 +119,10 @@ export default function FlavorsPage() {
   //   HEAT_SCALE.find(step => step.value === maxHeat)?.label ?? HEAT_SCALE[HEAT_SCALE.length - 1].label
 
   return (
-    <div className={styles.pageWrapper}>
-      <h1 className={styles.pageHeading}>Find Your Flavor</h1>
-      <p>
-        Kick up the flavor on any of our classic wings, boneless wings, or
-        crispy tenders!
+    <div className={pageStyles.pageWrapper}>
+      <h1 className={pageStyles.pageHeading}>Find Your Flavor</h1>
+      <p className={pageStyles.pageSubheading}>
+        Gotta have that funk? Turn up the heat and find your flavor groove.
       </p>
 
       {/* ---------------- HEAT SCALE FILTER ---------------- */}
