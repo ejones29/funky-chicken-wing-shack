@@ -24,18 +24,11 @@ export default {
       type: 'text',
     },
     {
-      name: 'spiciness',
-      title: 'Spiciness Level',
+      name: 'heatLevel',
+      title: 'Heat Level',
       type: 'number',
       description: 'Scale from 1 (mild) to 10 (extremely spicy)',
       validation: (Rule) => Rule.min(1).max(10),
-    },
-    {
-      name: 'price',
-      title: 'Price',
-      type: 'number',
-      description: 'Price in USD',
-      validation: (Rule) => Rule.min(0),
     },
     {
       name: 'image',
