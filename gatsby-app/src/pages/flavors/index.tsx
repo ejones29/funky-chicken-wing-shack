@@ -115,9 +115,6 @@ export default function FlavorsPage() {
     });
   }, [minHeat, maxHeat, flavorType]);
 
-  // const currentHeatLabel =
-  //   HEAT_SCALE.find(step => step.value === maxHeat)?.label ?? HEAT_SCALE[HEAT_SCALE.length - 1].label
-
   return (
     <div className={pageStyles.pageWrapper}>
       <h1 className={pageStyles.pageHeading}>Find Your Flavor</h1>
@@ -166,13 +163,6 @@ export default function FlavorsPage() {
             <span key={step.value}>{step.label}</span>
           ))}
         </div>
-
-        {/* <p>
-        Showing heat range:{" "}
-        <strong className="pinkText">
-          {minHeat} – {maxHeat}
-        </strong>
-        </p> */}
 
         {/* ---------------- WET / DRY TOGGLE ---------------- */}
         <div className={styles.flavorTypeSection}>
