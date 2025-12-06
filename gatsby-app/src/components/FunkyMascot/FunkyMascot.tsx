@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import * as styles from "./FunkyMascot.module.css";
 
 interface FunkyMascotProps {
-  imageSrc: string; // Pass your mascot PNG/SVG
+  imageSrc: string;
   alt?: string;
 }
 
@@ -13,7 +13,7 @@ export const FunkyMascot: React.FC<FunkyMascotProps> = ({
   const [isDancing, setIsDancing] = useState(false);
 
   const triggerDance = () => {
-    if (isDancing) return; // Prevent animation overlap
+    if (isDancing) return; // prevents animation overlap
     setIsDancing(true);
     setTimeout(() => setIsDancing(false), 1000); // match duration of dance animation (.dance .image)
   };

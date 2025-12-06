@@ -30,7 +30,7 @@
     transform: translateY(0) rotate(0deg);
   }
   3% {
-    transform: translateY(-2px) rotate(-1deg);
+    transform: translateY(-1px) rotate(-1deg);
   }
   6% {
     transform: translateY(0) rotate(1deg);
@@ -74,7 +74,7 @@
 }
 
 /* -------------------------------------
-   Sparkle Pop Effect (Optional)
+   Sparkle Pop Effect
 --------------------------------------*/
 .dance::after {
   content: "✨";
