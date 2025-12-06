@@ -1,6 +1,8 @@
 import React, { useRef, useState, useMemo } from "react";
 import * as styles from "./FlavorSwiper.module.css";
 import { FlavorCard } from "../FlavorCard/FlavorCard";
+import { FaAngleRight } from "react-icons/fa";
+import { FaAngleLeft } from "react-icons/fa";
 
 export default function FlavorSwiper({
   title = "Find Your Flavor",
@@ -54,7 +56,7 @@ export default function FlavorSwiper({
           onClick={scrollLeft}
           aria-label="Previous"
         >
-          ◀
+          <FaAngleLeft />
         </button>
 
         <div ref={trackRef} className={styles.track}>
@@ -70,7 +72,7 @@ export default function FlavorSwiper({
           onClick={scrollRight}
           aria-label="Next"
         >
-          ▶
+          <FaAngleRight />
         </button>
       </div>
     </div>
