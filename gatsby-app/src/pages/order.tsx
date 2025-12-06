@@ -9,37 +9,41 @@ export default function OrderPage() {
   });
   return (
     <>
-      <h1 className={pageStyles.pageHeading}>Order</h1>
-      <form>
-        <fieldset>
-          <legend>Customer Information</legend>
-          <label>
-            Name:
-            <input
-              type="text"
-              name="name"
-              value={values.name || ""}
-              onChange={(e) => setValues({ ...values, name: e.target.value })}
-            />
-          </label>
-          <label>
-            Email
-            <input
-              type="email"
-              name="email"
-              value={values.email || ""}
-              onChange={(e) => setValues({ ...values, email: e.target.value })}
-            />
-          </label>
-        </fieldset>
-        <fieldset>
-          <legend>Select Your Wings</legend>
-        </fieldset>
-        <fieldset>
-          <legend>Select Your Sides</legend>
-        </fieldset>
-        <button type="submit">Place Order</button>
-      </form>
+      <div className={pageStyles.pageWrapper}>
+        <h1 className={pageStyles.pageHeading}>Order</h1>
+        <form>
+          <fieldset>
+            <legend>Customer Information</legend>
+            <label>
+              Name:
+              <input
+                type="text"
+                name="name"
+                value={values.name || ""}
+                onChange={(e) => setValues({ ...values, name: e.target.value })}
+              />
+            </label>
+            <label>
+              Email
+              <input
+                type="email"
+                name="email"
+                value={values.email || ""}
+                onChange={(e) =>
+                  setValues({ ...values, email: e.target.value })
+                }
+              />
+            </label>
+          </fieldset>
+          <fieldset>
+            <legend>Select Your Wings</legend>
+          </fieldset>
+          <fieldset>
+            <legend>Select Your Sides</legend>
+          </fieldset>
+          <button type="submit">Place Order</button>
+        </form>
+      </div>
     </>
   );
 }
