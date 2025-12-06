@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import * as styles from "./FunkyMascot.module.css";
+import dancingFunkyChickenMascotImage from "../../assets/images/dancing-funky-chicken-mascot.png";
 
 interface FunkyMascotProps {
-  imageSrc: string;
+  imageSrc?: string;
   alt?: string;
 }
 
 export const FunkyMascot: React.FC<FunkyMascotProps> = ({
-  imageSrc,
+  imageSrc = dancingFunkyChickenMascotImage,
   alt = "Funky Chicken Mascot",
 }) => {
   const [isDancing, setIsDancing] = useState(false);

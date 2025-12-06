@@ -22,7 +22,7 @@ export const Hero: React.FC = () => {
           className={styles.image}
         /> */}
 
-        <FunkyMascot imageSrc={mascotImgAsset} />
+        <FunkyMascot />
       </div>
     </section>
   );
