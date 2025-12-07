@@ -29,9 +29,6 @@ export const FeaturedSpecials: React.FC = () => {
     <section className={styles.section}>
       <div className={styles.headerRow}>
         <h2 className={styles.heading}>Featured Specials</h2>
-        <button type="button" className={styles.viewAllButton}>
-          View all
-        </button>
       </div>
 
       <div className={styles.grid}>

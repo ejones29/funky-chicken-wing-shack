@@ -22,7 +22,35 @@
 }
 
 .slider {
+  pointer-events: auto;
   width: 100%;
+  background: transparent;
+  -webkit-appearance: none;
+  /* position: absolute; */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 12px;
+}
+
+.slider::-webkit-slider-runnable-track {
+  height: 12px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #3cf3ff, #ffc700, #ff7a2f, #ff3fbc);
+  box-shadow: 0 0 4px rgba(255, 63, 188, 0.5), 0 0 8px rgba(255, 199, 0, 0.4);
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 22px;
+  width: 22px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid #ff3fbc;
+  margin-top: -5px;
+  position: relative;
+  z-index: 10;
+  cursor: grabbing;
 }
 
 .sliderLabels {
@@ -44,20 +72,32 @@
 /* Arrows */
 .arrowLeft,
 .arrowRight {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   background: var(--funky-yellow, #fbd34c);
   border: none;
-  color: black;
-  font-size: 1.25rem;
-  padding: 0.5rem 0.75rem;
+  height: 32px;
+  width: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 2rem;
+  padding: 0.25rem 0.5rem;
   border-radius: 50%;
   cursor: pointer;
   transition: 0.2s ease;
   box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+  z-index: 5;
 }
 
-.arrowLeft:hover,
-.arrowRight:hover {
-  transform: scale(1.1);
+.arrowLeft {
+  left: -16px;
+}
+
+.arrowRight {
+  right: -16px;
 }
 
 /* Scroll Snap Track */
@@ -80,9 +120,8 @@
 
 /* Each Slide */
 .slide {
-  flex: 0 0 80%;
-  max-width: 320px;
-
+  flex: 0 0 25%;
+  max-width: 240px;
   scroll-snap-align: center;
   scroll-snap-stop: always;
   transition: transform 0.3s ease;
