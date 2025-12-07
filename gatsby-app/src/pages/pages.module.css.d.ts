@@ -2,3 +2,4 @@
 export const pageWrapper: string;
 export const pageHeading: string;
 export const pageSubheading: string;
+export const section: string;

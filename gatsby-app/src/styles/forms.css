@@ -4,7 +4,7 @@
 form {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 1rem 0;
+  /* padding: 1rem 0; */
   color: white;
 }
 
@@ -96,10 +96,6 @@ button[type="submit"]:active {
 @media (max-width: 480px) {
   h1 {
     font-size: 2rem;
-  }
-
-  form {
-    padding: 1rem;
   }
 
   fieldset {
