@@ -25,7 +25,7 @@ const config: GatsbyConfig = {
       options: {
         projectId: "q8rlikfg",
         dataset: "production",
-        watchMode: true,
+        watchMode: process.env.NODE_ENV === 'development',
         token: process.env.SANITY_READ_TOKEN,
       },
     },
