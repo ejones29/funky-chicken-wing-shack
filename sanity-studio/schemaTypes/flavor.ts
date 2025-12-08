@@ -26,11 +26,11 @@ export const flavor = defineType({
       type: 'text',
     },
     {
-      name: 'spiceLevel',
-      title: 'Spice Level',
+      name: 'heatLevel',
+      title: 'Heat Level',
       type: 'number',
-      description: 'Scale from 1 (mild) to 10 (extremely spicy)',
-      validation: (Rule) => Rule.min(1).max(10),
+      description: 'Scale from 1 (mild) to 5 (extremely spicy)',
+      validation: (Rule) => Rule.min(1).max(5),
     },
     {
       name: 'type',

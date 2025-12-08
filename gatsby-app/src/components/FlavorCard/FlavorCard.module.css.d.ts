@@ -3,6 +3,7 @@ export const card: string;
 export const imageWrapper: string;
 export const image: string;
 export const title: string;
+export const heatLevel: string;
 export const desc: string;
 export const gold: string;
 export const pink: string;

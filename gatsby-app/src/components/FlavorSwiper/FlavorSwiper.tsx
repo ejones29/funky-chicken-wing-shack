@@ -3,18 +3,25 @@ import * as styles from "./FlavorSwiper.module.css";
 import { FlavorCard } from "../FlavorCard/FlavorCard";
 import { FaAngleRight } from "react-icons/fa";
 import { FaAngleLeft } from "react-icons/fa";
+import type { FlavorCardProps } from "../FlavorCard/FlavorCard";
+interface FlavorSwiperProps {
+  title?: string;
+  subtitle?: string;
+  items: Array<FlavorCardProps>;
+  maxHeat?: number;
+}
 
 export default function FlavorSwiper({
   title = "Find Your Flavor",
   subtitle = "Explore flavors that range from mild to wild.",
   items,
   maxHeat: initialMaxHeat = 5,
-}) {
+}: FlavorSwiperProps) {
   const [maxHeat, setMaxHeat] = useState(initialMaxHeat);
   const trackRef = useRef<HTMLDivElement>(null);
 
   const filteredItems = useMemo(
-    () => items.filter((item) => item.heat <= maxHeat),
+    () => items.filter((item) => item.heatLevel <= maxHeat),
     [maxHeat, items]
   );
 

@@ -1,20 +1,42 @@
 import React from "react";
+import { graphql } from "gatsby";
 import * as pageStyles from "./pages.module.css";
 import useForm from "../hooks/useForm";
 import FlavorSwiper from "../components/FlavorSwiper/FlavorSwiper";
+import type { FlavorsPageProps, FlavorNode } from "../types/flavor";
 
-// Note: These images will be replaced by Sanity data later
-import BuffaloHotImage from "../assets/images/flavors/buffalo-hot.png";
-import BoogieBBQImage from "../assets/images/flavors/boogie-bbq.png";
-import ChickenLickinImage from "../assets/images/flavors/honey-mustard.png";
-import FunkadelicFireImage from "../assets/images/flavors/funkadelic-fire.png";
-import GroovyGarlicImage from "../assets/images/flavors/groovy-garlic.png";
-import JivinJerkImage from "../assets/images/flavors/jivin-jerk.png";
-import DiscoInfernoImage from "../assets/images/flavors/disco-inferno.png";
-import SoulfulSrirachaImage from "../assets/images/flavors/soulful-sriracha.png";
-import PsychedelicPineappleImage from "../assets/images/flavors/psychedelic-pineapple.png";
+// Gatsby requires page queries to be defined directly in the page file using the graphql tag.
+// The query cannot be imported from another file or Gatsby won't detect it at build time.
+export const query = graphql`
+  query OrderPageFlavorsQuery {
+    flavors: allSanityFlavor {
+      nodes {
+        name
+        heatLevel
+        description
+        type
+        tags
+        slug {
+          current
+        }
+        icon {
+          asset {
+            url
+          }
+        }
+      }
+    }
+  }
+`;
 
-export default function OrderPage() {
+export default function OrderPage({ data }: FlavorsPageProps) {
+  const flavors = data.flavors.nodes;
+  // Filter out flavors without icons to match FlavorCardProps type requirements
+  const flavorsWithIcons = flavors.filter(
+    (flavor): flavor is FlavorNode & { icon: { asset: { url: string } } } =>
+      flavor.icon !== undefined
+  );
+
   const { values, setValues } = useForm({
     name: "",
     email: "",
@@ -61,84 +83,7 @@ export default function OrderPage() {
         </section>
         <section className={pageStyles.section}>
           {/* ---------------- FLAVOR SWIPER ---------------- */}
-          {/* Note: The items prop will be populated with Sanity data later */}
-
-          <FlavorSwiper
-            items={[
-              {
-                name: "Buffalo Hot",
-                description: "Classic sauce with a spicy kick",
-                imageUrl: BuffaloHotImage,
-                borderColor: "gold",
-                heat: 3,
-                type: "wet",
-              },
-              {
-                name: "Boogie BBQ",
-                description: "Smoky goodness with a hint of sweet",
-                imageUrl: BoogieBBQImage,
-                borderColor: "pink",
-                heat: 2,
-                type: "wet",
-              },
-              {
-                name: "Chicken Lickin'",
-                description: "Honey mustard perfection",
-                imageUrl: ChickenLickinImage,
-                borderColor: "teal",
-                heat: 2,
-                type: "wet",
-              },
-              {
-                name: "Funkadelic Fire",
-                description: "Turn up the heat and get down!",
-                imageUrl: FunkadelicFireImage,
-                borderColor: "pink",
-                heat: 5,
-                type: "wet",
-              },
-              {
-                name: "Groovy Garlic",
-                description: "Savory garlic with an herbal flair",
-                imageUrl: GroovyGarlicImage,
-                borderColor: "teal",
-                heat: 2,
-                type: "wet",
-              },
-              {
-                name: "Jivin’ Jerk",
-                description: "Bold and spicy Caribbean flavor",
-                imageUrl: JivinJerkImage,
-                borderColor: "gold",
-                heat: 3,
-                type: "dry",
-              },
-              {
-                name: "Disco Inferno",
-                description: "Extremely hot sauce for the daring",
-                imageUrl: DiscoInfernoImage,
-                borderColor: "purple",
-                heat: 5,
-                type: "wet",
-              },
-              {
-                name: "Soulful Sriracha",
-                description: "Tangy and spicy with a kick",
-                imageUrl: SoulfulSrirachaImage,
-                borderColor: "purple",
-                heat: 4,
-                type: "wet",
-              },
-              {
-                name: "Psychedelic Pineapple",
-                description: "Sweet and spicy tropical blend",
-                imageUrl: PsychedelicPineappleImage,
-                borderColor: "pink",
-                heat: 1,
-                type: "dry",
-              },
-            ]}
-          />
+          <FlavorSwiper items={flavorsWithIcons} />
         </section>
       </div>
     </>
