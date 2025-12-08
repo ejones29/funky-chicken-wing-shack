@@ -4,6 +4,7 @@ import * as styles from "./flavors.module.css";
 import * as pageStyles from "../pages.module.css";
 import { FlavorCard } from "../../components/FlavorCard/FlavorCard";
 import type { FlavorsPageProps } from "../../types/flavor";
+import { getBorderColorFromHeatLevel } from "../../utils/flavorHelpers";
 
 // This will be replaced by Sanity data later
 const HEAT_SCALE = [
@@ -154,15 +155,7 @@ export default function FlavorsPage({ data }: FlavorsPageProps) {
                 description={flavor.description}
                 heatLevel={flavor.heatLevel}
                 icon={flavor.icon ? flavor.icon : { asset: { url: "🕺" } }}
-                borderColor={
-                  flavor.heatLevel === 5
-                    ? "pink"
-                    : flavor.heatLevel >= 4
-                    ? "gold"
-                    : flavor.heatLevel >= 2
-                    ? "purple"
-                    : "teal"
-                }
+                borderColor={getBorderColorFromHeatLevel(flavor.heatLevel)}
               />
             ))}
           </div>
