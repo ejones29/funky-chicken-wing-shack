@@ -3,7 +3,7 @@ import { graphql } from "gatsby";
 import * as pageStyles from "./pages.module.css";
 import useForm from "../hooks/useForm";
 import FlavorSwiper from "../components/FlavorSwiper/FlavorSwiper";
-import type { FlavorsPageProps } from "../types/flavor";
+import type { FlavorsPageProps, FlavorNode } from "../types/flavor";
 
 // Gatsby requires page queries to be defined directly in the page file using the graphql tag.
 // The query cannot be imported from another file or Gatsby won't detect it at build time.
@@ -31,6 +31,11 @@ export const query = graphql`
 
 export default function OrderPage({ data }: FlavorsPageProps) {
   const flavors = data.flavors.nodes;
+  // Filter out flavors without icons to match FlavorCardProps type requirements
+  const flavorsWithIcons = flavors.filter(
+    (flavor): flavor is FlavorNode & { icon: { asset: { url: string } } } =>
+      flavor.icon !== undefined
+  );
 
   const { values, setValues } = useForm({
     name: "",
@@ -78,7 +83,7 @@ export default function OrderPage({ data }: FlavorsPageProps) {
         </section>
         <section className={pageStyles.section}>
           {/* ---------------- FLAVOR SWIPER ---------------- */}
-          <FlavorSwiper items={flavors} />
+          <FlavorSwiper items={flavorsWithIcons} />
         </section>
       </div>
     </>
