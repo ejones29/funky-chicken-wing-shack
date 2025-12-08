@@ -34,7 +34,7 @@ export const FlavorCard: React.FC<FlavorCardProps> = ({
         <img src={icon.asset.url} alt={name} className={styles.image} />
       </div>
       <h3 className={styles.title}>{name}</h3>
-      <p className={styles.heatLevel}>{heatLevelEmojiString[heatLevel]}</p>
+      <p className={styles.heatLevel}>{heatLevelEmojiString[heatLevel] || ""}</p>
       <p className={styles.desc}>{description}</p>
       <ActionButton label="Order Now" to="/order" as="link" />
     </div>
