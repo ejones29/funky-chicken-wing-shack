@@ -1,17 +1,9 @@
 import React, { useMemo, useState } from "react";
+import { graphql } from "gatsby";
 import * as styles from "./flavors.module.css";
 import * as pageStyles from "../pages.module.css";
 import { FlavorCard } from "../../components/FlavorCard/FlavorCard";
-
-import BuffaloHotImage from "../../assets/images/flavors/buffalo-hot.png";
-import BoogieBBQImage from "../../assets/images/flavors/boogie-bbq.png";
-import ChickenLickinImage from "../../assets/images/flavors/honey-mustard.png";
-import FunkadelicFireImage from "../../assets/images/flavors/funkadelic-fire.png";
-import GroovyGarlicImage from "../../assets/images/flavors/groovy-garlic.png";
-import JivinJerkImage from "../../assets/images/flavors/jivin-jerk.png";
-import DiscoInfernoImage from "../../assets/images/flavors/disco-inferno.png";
-import SoulfulSrirachaImage from "../../assets/images/flavors/soulful-sriracha.png";
-import PsychedelicPineappleImage from "../../assets/images/flavors/psychedelic-pineapple.png";
+import type { FlavorsPageProps } from "../../types/flavor";
 
 // This will be replaced by Sanity data later
 const HEAT_SCALE = [
@@ -22,96 +14,47 @@ const HEAT_SCALE = [
   { label: "Blazing", value: 5 },
 ];
 
-// This will be replaced by Sanity data later
-const FLAVORS = [
-  {
-    name: "Buffalo Hot",
-    description: "Classic sauce with a spicy kick",
-    imageUrl: BuffaloHotImage,
-    borderColor: "gold",
-    heat: 3,
-    type: "wet",
-  },
-  {
-    name: "Boogie BBQ",
-    description: "Smoky goodness with a hint of sweet",
-    imageUrl: BoogieBBQImage,
-    borderColor: "pink",
-    heat: 2,
-    type: "wet",
-  },
-  {
-    name: "Chicken Lickin'",
-    description: "Honey mustard perfection",
-    imageUrl: ChickenLickinImage,
-    borderColor: "teal",
-    heat: 2,
-    type: "wet",
-  },
-  {
-    name: "Funkadelic Fire",
-    description: "Turn up the heat and get down!",
-    imageUrl: FunkadelicFireImage,
-    borderColor: "pink",
-    heat: 5,
-    type: "wet",
-  },
-  {
-    name: "Groovy Garlic",
-    description: "Savory garlic with an herbal flair",
-    imageUrl: GroovyGarlicImage,
-    borderColor: "teal",
-    heat: 2,
-    type: "wet",
-  },
-  {
-    name: "Jivin’ Jerk",
-    description: "Bold and spicy Caribbean flavor",
-    imageUrl: JivinJerkImage,
-    borderColor: "gold",
-    heat: 3,
-    type: "dry",
-  },
-  {
-    name: "Disco Inferno",
-    description: "Extremely hot sauce for the daring",
-    imageUrl: DiscoInfernoImage,
-    borderColor: "purple",
-    heat: 5,
-    type: "wet",
-  },
-  {
-    name: "Soulful Sriracha",
-    description: "Tangy and spicy with a kick",
-    imageUrl: SoulfulSrirachaImage,
-    borderColor: "purple",
-    heat: 4,
-    type: "wet",
-  },
-  {
-    name: "Psychedelic Pineapple",
-    description: "Sweet and spicy tropical blend",
-    imageUrl: PsychedelicPineappleImage,
-    borderColor: "pink",
-    heat: 1,
-    type: "dry",
-  },
-];
+// Gatsby requires page queries to be defined directly in the page file using the graphql tag.
+// The query cannot be imported from another file or Gatsby won't detect it at build time.
+export const query = graphql`
+  query FlavorsQuery {
+    flavors: allSanityFlavor {
+      nodes {
+        name
+        heatLevel
+        description
+        type
+        tags
+        slug {
+          current
+        }
+        icon {
+          asset {
+            url
+          }
+        }
+      }
+    }
+  }
+`;
 
-export default function FlavorsPage() {
+export default function FlavorsPage({ data }: FlavorsPageProps) {
   // Manage state for heat range
   const [minHeat, setMinHeat] = useState(1);
   const [maxHeat, setMaxHeat] = useState(5);
 
   // Manage state for flavor type
   const [flavorType, setFlavorType] = useState<"all" | "wet" | "dry">("all");
+  const flavors = data.flavors.nodes;
 
   // Filter flavor list with all conditions
   const visibleFlavors = useMemo(() => {
-    return FLAVORS.filter((flavor) => {
-      const withinHeat = flavor.heat >= minHeat && flavor.heat <= maxHeat;
+    return flavors.filter((flavor) => {
+      const withinHeat =
+        flavor.heatLevel >= minHeat && flavor.heatLevel <= maxHeat;
       const matchesType = flavorType === "all" || flavor.type === flavorType;
-      return withinHeat && matchesType;
+      const hasIcon = flavor.icon !== undefined;
+      return withinHeat && matchesType && hasIcon;
     });
   }, [minHeat, maxHeat, flavorType]);
 
@@ -209,8 +152,17 @@ export default function FlavorsPage() {
                 key={flavor.name}
                 name={flavor.name}
                 description={flavor.description}
-                imageUrl={flavor.imageUrl}
-                borderColor={flavor.borderColor as any}
+                heatLevel={flavor.heatLevel}
+                icon={flavor.icon ? flavor.icon : { asset: { url: "🕺" } }}
+                borderColor={
+                  flavor.heatLevel === 5
+                    ? "pink"
+                    : flavor.heatLevel >= 4
+                    ? "gold"
+                    : flavor.heatLevel >= 2
+                    ? "purple"
+                    : "teal"
+                }
               />
             ))}
           </div>
