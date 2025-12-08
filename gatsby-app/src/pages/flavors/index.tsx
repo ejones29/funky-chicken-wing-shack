@@ -4,6 +4,7 @@ import * as styles from "./flavors.module.css";
 import * as pageStyles from "../pages.module.css";
 import { FlavorCard } from "../../components/FlavorCard/FlavorCard";
 import type { FlavorsPageProps } from "../../types/flavor";
+import { getBorderColorFromHeatLevel } from "../../utils/flavorHelpers";
 
 const HEAT_SCALE = [
   { label: "Mild", value: 1 },
@@ -152,16 +153,8 @@ export default function FlavorsPage({ data }: FlavorsPageProps) {
                 name={flavor.name}
                 description={flavor.description}
                 heatLevel={flavor.heatLevel}
-                icon={flavor.icon ? flavor.icon : { asset: { url: "https://via.placeholder.com/64?text=?" } }}
-                borderColor={
-                  flavor.heatLevel === 5
-                    ? "pink"
-                    : flavor.heatLevel >= 4
-                    ? "gold"
-                    : flavor.heatLevel >= 2
-                    ? "purple"
-                    : "teal"
-                }
+                icon={flavor.icon ? flavor.icon : { asset: { url: "🕺" } }}
+                borderColor={getBorderColorFromHeatLevel(flavor.heatLevel)}
               />
             ))}
           </div>
