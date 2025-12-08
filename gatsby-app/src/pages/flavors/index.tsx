@@ -6,7 +6,6 @@ import { FlavorCard } from "../../components/FlavorCard/FlavorCard";
 import type { FlavorsPageProps } from "../../types/flavor";
 import { getBorderColorFromHeatLevel } from "../../utils/flavorHelpers";
 
-// This will be replaced by Sanity data later
 const HEAT_SCALE = [
   { label: "Mild", value: 1 },
   { label: "Warm", value: 2 },

@@ -8,7 +8,7 @@ import type { FlavorsPageProps } from "../types/flavor";
 // Gatsby requires page queries to be defined directly in the page file using the graphql tag.
 // The query cannot be imported from another file or Gatsby won't detect it at build time.
 export const query = graphql`
-  query FlavorsQuery {
+  query OrderPageFlavorsQuery {
     flavors: allSanityFlavor {
       nodes {
         name
