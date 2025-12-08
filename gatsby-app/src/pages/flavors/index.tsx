@@ -152,7 +152,7 @@ export default function FlavorsPage({ data }: FlavorsPageProps) {
                 name={flavor.name}
                 description={flavor.description}
                 heatLevel={flavor.heatLevel}
-                icon={flavor.icon ? flavor.icon : { asset: { url: "🕺" } }}
+                icon={flavor.icon ? flavor.icon : { asset: { url: "https://via.placeholder.com/64?text=?" } }}
                 borderColor={
                   flavor.heatLevel === 5
                     ? "pink"
