@@ -1,0 +1,26 @@
+.orderForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.orderFormGrid {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .orderFormGrid {
+    flex-direction: column;
+  }
+}
+
+.orderSummary,
+.orderOptions {
+  width: 100%;
+  flex: 1;
+}

@@ -3,3 +3,4 @@ export const pageWrapper: string;
 export const pageSubheading: string;
 export const pageHeading: string;
 export const section: string;
+export const grid: string;

@@ -33,3 +33,18 @@
 .section:last-child {
   margin-bottom: 0;
 }
+
+/* 3-column layout on desktop */
+.grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  padding-bottom: 40px;
+}
+
+/* Add more spacing for desktop */
+@media (min-width: 1000px) {
+  .grid {
+    gap: 28px;
+  }
+}
