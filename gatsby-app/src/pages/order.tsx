@@ -3,7 +3,7 @@ import { graphql } from "gatsby";
 import * as pageStyles from "./pages.module.css";
 import useForm from "../hooks/useForm";
 import FlavorSwiper from "../components/FlavorSwiper/FlavorSwiper";
-import type { FlavorsPageProps, FlavorNode } from "../types/flavor";
+import type { FlavorsPageProps, FlavorNode } from "../types/flavorPage.ts";
 
 // Gatsby requires page queries to be defined directly in the page file using the graphql tag.
 // The query cannot be imported from another file or Gatsby won't detect it at build time.
