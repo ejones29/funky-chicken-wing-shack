@@ -1,0 +1,46 @@
+.categoryFilterSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.categoryList {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.categoryButtons {
+  display: flex;
+  gap: 1rem;
+}
+
+.categoryButtons button {
+  background: none;
+  border: 2px solid var(--color-primary-teal);
+  border-radius: 8px;
+  padding: 6px 14px;
+  cursor: pointer;
+  color: var(--color-text-primary);
+  transition: all 0.2s ease;
+}
+
+.categoryButtons button.active {
+  background: var(--color-primary-teal);
+  color: black;
+}
+
+.menuSection {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.menuItem {
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 2.5rem;
+}

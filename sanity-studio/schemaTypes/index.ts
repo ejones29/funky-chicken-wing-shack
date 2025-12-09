@@ -6,7 +6,6 @@ import homePage from './homePage'
 import siteSettings from './siteSettings'
 
 // Object types
-import priceOption from './objects/priceOption'
 import menuSection from './objects/menuSection'
 import imageWithAlt from './objects/imageWithAlt'
 
@@ -19,7 +18,6 @@ export const schemaTypes = [
   homePage,
   siteSettings,
   // Object types
-  priceOption,
   menuSection,
   imageWithAlt,
 ]

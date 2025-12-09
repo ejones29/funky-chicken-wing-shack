@@ -27,9 +27,10 @@ export default defineType({
       type: 'text',
     }),
     defineField({
-      name: 'priceOptions',
-      type: 'array',
-      of: [{type: 'priceOption'}],
+      name: 'price',
+      type: 'number',
+      title: 'Price (in USD)',
+      validation: (Rule) => Rule.min(0),
     }),
     defineField({
       name: 'flavors',
