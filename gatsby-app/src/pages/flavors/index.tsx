@@ -3,7 +3,7 @@ import { graphql } from "gatsby";
 import * as styles from "./flavors.module.css";
 import * as pageStyles from "../pages.module.css";
 import { FlavorCard } from "../../components/FlavorCard/FlavorCard";
-import type { FlavorsPageProps } from "../../types/flavor";
+import type { FlavorsPageProps } from "../../types/flavorPage.ts";
 import { getBorderColorFromHeatLevel } from "../../utils/flavorHelpers";
 
 const HEAT_SCALE = [

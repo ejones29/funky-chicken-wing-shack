@@ -3,6 +3,8 @@ import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 
+import {deskStructure} from './deskStructure'
+
 export default defineConfig({
   name: 'default',
   title: 'funky-chicken-wing-shack',
@@ -10,7 +12,12 @@ export default defineConfig({
   projectId: 'q8rlikfg',
   dataset: 'production',
 
-  plugins: [structureTool(), visionTool()],
+  plugins: [
+    structureTool({
+      structure: deskStructure,
+    }),
+    visionTool(),
+  ],
 
   schema: {
     types: schemaTypes,

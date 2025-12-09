@@ -58,6 +58,12 @@ export const flavor = defineType({
       },
     },
   ],
+  preview: {
+    select: {
+      title: 'name',
+      media: 'icon',
+    },
+  },
 })
 
 export default flavor
