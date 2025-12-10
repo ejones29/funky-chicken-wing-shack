@@ -1,0 +1,48 @@
+.orderSummary {
+  width: 100%;
+  flex: 1;
+}
+
+.itemList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.total {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  text-align: right;
+}
+@media (max-width: 600px) {
+  .orderSummary {
+    margin-top: 2rem;
+  }
+}
+
+.itemQuantity {
+  font-size: 0.75rem;
+}
+
+.selectedFlavor {
+  display: block;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  color: var(--color-primary-teal);
+}
+
+.price {
+  margin-left: auto;
+}
+
+.removeButton {
+  justify-self: end;
+}

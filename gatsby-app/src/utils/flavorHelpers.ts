@@ -16,3 +16,12 @@ export function getBorderColorFromHeatLevel(
     return "teal";
   }
 }
+
+/**
+ * Returns fire emojis representing the heat level
+ * @param heatLevel - The heat level of the flavor (1-5)
+ * @returns A string of fire emojis
+ */
+export function getHeatLevelEmojis(heatLevel: number): string {
+  return "🔥".repeat(heatLevel);
+}

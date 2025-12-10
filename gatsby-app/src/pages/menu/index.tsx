@@ -25,6 +25,11 @@ export const query = graphql`
           heatLevel
         }
         image {
+          image {
+            asset {
+              url
+            }
+          }
           alt
         }
       }
@@ -33,7 +38,6 @@ export const query = graphql`
 `;
 
 export default function MenuPage({ data }: MenuPageProps) {
-  console.log("Menu Page Data:", data);
   const menuItems = data.menuItems.nodes;
 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -79,13 +83,18 @@ export default function MenuPage({ data }: MenuPageProps) {
         </div>
       </section>
       <section className={menuPageStyles.menuSection}>
-        {filteredMenuItems.map((item) => (
-          <div key={item.id} className={menuPageStyles.menuItem}>
-            <h2>{item.title}</h2>
-            {item.description && <p>{item.description}</p>}
-            {item.price && <p>${item.price.toFixed(2)}</p>}
-            <ActionButton label="Order Now" to="/order" as="link" />
-            {/* {item.flavors && item.flavors.length > 0 && (
+        <div className={pageStyles.grid}>
+          {filteredMenuItems.map((item) => (
+            <div key={item.id} className={menuPageStyles.menuItem}>
+              <h2>{item.title}</h2>
+              <img
+                src={item.image?.image.asset.url}
+                alt={item.image?.alt || ""}
+              />
+              {item.description && <p>{item.description}</p>}
+              {item.price && <p>${item.price.toFixed(2)}</p>}
+              <ActionButton label="Order Now" to="/order" as="link" />
+              {/* {item.flavors && item.flavors.length > 0 && (
               <p>
                 Flavors:{" "}
                 {item.flavors
@@ -96,8 +105,9 @@ export default function MenuPage({ data }: MenuPageProps) {
                   .join(", ")}
               </p>
             )} */}
-          </div>
-        ))}
+            </div>
+          ))}
+        </div>
       </section>
     </>
   );
