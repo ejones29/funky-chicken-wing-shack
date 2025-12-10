@@ -38,7 +38,6 @@ export const query = graphql`
 `;
 
 export default function MenuPage({ data }: MenuPageProps) {
-  console.log("Menu Page Data:", data);
   const menuItems = data.menuItems.nodes;
 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);

@@ -76,10 +76,7 @@ export default function OrderPage({ data }: OrderPageProps) {
     flavor: "",
   });
 
-  const { order, addToOrder, removeFromOrder } = useOrder({
-    items: menuItems,
-    values,
-  });
+  const { order, addToOrder, removeFromOrder } = useOrder();
 
   // Wrapper to remove item from both order and form values
   const handleRemoveItem = (itemId: string) => {
@@ -111,14 +108,19 @@ export default function OrderPage({ data }: OrderPageProps) {
                       name="wings"
                       value={values.wings || ""}
                       onChange={(e) => {
+                        const selectedWing = wings.find(
+                          (item) => item._id === e.target.value
+                        );
                         setValues({ ...values, wings: e.target.value });
-                        addToOrder({
-                          id: e.target.value,
-                          category: "wings",
-                          name: "",
-                          price: 0,
-                          quantity: 1,
-                        });
+                        if (selectedWing) {
+                          addToOrder({
+                            id: selectedWing._id,
+                            category: "wings",
+                            name: selectedWing.title,
+                            price: selectedWing.price,
+                            quantity: 1,
+                          });
+                        }
                       }}
                     >
                       <option value="">-- Choose a wing option --</option>
@@ -135,9 +137,21 @@ export default function OrderPage({ data }: OrderPageProps) {
                     <select
                       name="flavor"
                       value={values.flavor || ""}
-                      onChange={(e) =>
-                        setValues({ ...values, flavor: e.target.value })
-                      }
+                      onChange={(e) => {
+                        const selectedFlavor = flavors.find(
+                          (flavor) => flavor.slug.current === e.target.value
+                        );
+                        setValues({ ...values, flavor: e.target.value });
+                        if (selectedFlavor) {
+                          addToOrder({
+                            id: selectedFlavor.slug.current,
+                            category: "flavor",
+                            name: selectedFlavor.name,
+                            price: 0,
+                            quantity: 1,
+                          });
+                        }
+                      }}
                     >
                       <option value="">-- Choose a flavor --</option>
                       {flavors.map((flavor) => (
@@ -181,9 +195,21 @@ export default function OrderPage({ data }: OrderPageProps) {
                     <select
                       name="sides"
                       value={values.sides || ""}
-                      onChange={(e) =>
-                        setValues({ ...values, sides: e.target.value })
-                      }
+                      onChange={(e) => {
+                        const selectedSide = sides.find(
+                          (item) => item._id === e.target.value
+                        );
+                        setValues({ ...values, sides: e.target.value });
+                        if (selectedSide) {
+                          addToOrder({
+                            id: selectedSide._id,
+                            category: "sides",
+                            name: selectedSide.title,
+                            price: selectedSide.price,
+                            quantity: 1,
+                          });
+                        }
+                      }}
                     >
                       <option value="">-- Choose a side --</option>
                       {sides.map((item) => (
@@ -199,43 +225,7 @@ export default function OrderPage({ data }: OrderPageProps) {
                 <fieldset>
                   <legend>Order Summary</legend>
                   <OrderSummary
-                    items={[
-                      ...(values.wings
-                        ? wings
-                            .filter((item) => item._id === values.wings)
-                            .map((item) => ({
-                              id: item._id,
-                              category: "wings",
-                              name: item.title,
-                              quantity: 1,
-                              price: item.price,
-                            }))
-                        : []),
-                      ...(values.flavor
-                        ? flavors
-                            .filter(
-                              (flavor) => flavor.slug.current === values.flavor
-                            )
-                            .map((flavor) => ({
-                              id: flavor.slug.current,
-                              category: "flavor",
-                              name: flavor.name,
-                              quantity: 1,
-                              price: 0, // Assuming flavor has no additional cost
-                            }))
-                        : []),
-                      ...(values.sides
-                        ? sides
-                            .filter((item) => item._id === values.sides)
-                            .map((item) => ({
-                              id: item._id,
-                              category: "sides",
-                              name: item.title,
-                              quantity: 1,
-                              price: item.price,
-                            }))
-                        : []),
-                    ]}
+                    items={order.items}
                     removeFromOrder={handleRemoveItem}
                   />
                 </fieldset>
