@@ -1,53 +1,160 @@
 import * as React from "react";
-import { motion, useAnimation } from "framer-motion";
-import * as styles from "./FunkyMascotSvg.module.css";
+import { useEffect, useState } from "react";
+import { motion } from "motion/react";
+import * as styles from "./DancingMascot.module.css";
 
-export const FunkyMascotSvg: React.FC = () => {
-  const mascotControls = useAnimation();
-  const sunglassesControls = useAnimation();
+export type DancePose = "groove" | "lean" | "spin" | "disco";
 
-  // Idle bounce every 10s
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      mascotControls.start({
-        y: [0, -6, 0],
-        rotate: [0, -1, 0],
-        transition: {
-          duration: 0.8,
-          ease: "easeInOut",
-        },
-      });
-    }, 10000);
+interface DancingMascotProps {
+  pose?: DancePose;
+}
 
-    return () => clearInterval(interval);
-  }, [mascotControls]);
-
-  // Sunglasses wiggle (looping)
-  React.useEffect(() => {
-    sunglassesControls.start({
-      rotate: [-4, 4, -4],
-      transition: {
-        duration: 2.5,
-        ease: "easeInOut",
+const mascotVariants = {
+  groove: {
+    y: [0, -10, 0],
+    rotate: [0, -6, 6, 0],
+    transition: { duration: 0.6 },
+  },
+  lean: {
+    rotate: -12,
+    x: -12,
+    scale: 1.05,
+    transition: { duration: 0.4 },
+  },
+  spin: {
+    rotate: [0, 360],
+    scale: [1, 1.05, 1],
+    transition: { duration: 0.8, ease: "easeInOut" as const },
+  },
+  disco: {
+    rotate: [0, 360],
+    y: [0, -12, 0],
+    scale: [1, 1.05, 1],
+    transition: {
+      rotate: {
         repeat: Infinity,
-        repeatDelay: 4,
+        duration: 1.2,
+        ease: "linear",
       },
-    });
-  }, [sunglassesControls]);
+      y: {
+        repeat: Infinity,
+        duration: 0.6,
+        ease: "easeInOut",
+      },
+    },
+  },
+};
 
-  // Tap / click dance pose
-  const handleTap = async () => {
-    await mascotControls.start({
-      rotate: [0, 6, -6, 0],
-      scale: [1, 1.05, 1],
-      transition: { duration: 0.6 },
-    });
+const wingVariants = {
+  groove: {
+    rotate: [-18, 18, -18],
+    transition: {
+      duration: 1.2,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  },
+  lean: { rotate: 20 },
+  spin: { rotate: [-30, 30, -30] },
+  disco: {
+    rotate: [-35, 35, -35],
+    transition: {
+      repeat: Infinity,
+      duration: 0.4,
+      ease: "easeInOut",
+    },
+  },
+};
+
+const sunglassesVariants = {
+  groove: {
+    rotate: [-6, 6, -6],
+    transition: {
+      duration: 2.5,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  },
+  lean: { y: -6 },
+  spin: { rotate: [0, 20, -20, 0] },
+  disco: {
+    rotate: [-12, 12, -12],
+    y: [0, -4, 0],
+    transition: {
+      repeat: Infinity,
+      duration: 0.5,
+      ease: "easeInOut",
+    },
+  },
+};
+
+const necklaceVariants = {
+  groove: {
+    rotate: [-4, 4, -4],
+    transition: {
+      duration: 1.8,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  },
+  lean: { rotate: 6 },
+  spin: { rotate: [-10, 10, -10] },
+  disco: {
+    rotate: [-20, 20, -20],
+    transition: {
+      repeat: Infinity,
+      duration: 0.4,
+      ease: "easeInOut",
+    },
+  },
+};
+
+export const DancingMascot: React.FC<DancingMascotProps> = ({ pose }) => {
+  const poses: DancePose[] = ["groove", "lean", "spin"];
+
+  const [poseIndex, setPoseIndex] = useState(0);
+  const [currentPose, setCurrentPose] = useState<DancePose>("groove");
+
+  const poseDurations: Record<DancePose, number> = {
+    groove: 600,
+    lean: 400,
+    spin: 800,
+    disco: 0,
+  };
+
+  useEffect(() => {
+    if (!pose) return;
+
+    setCurrentPose(pose);
+
+    if (pose === "disco") return;
+
+    const timeout = setTimeout(() => {
+      setCurrentPose("groove");
+    }, poseDurations[pose]);
+
+    return () => clearTimeout(timeout);
+  }, [pose]);
+
+  // Tap / click dance pose - prevent overlap with timeouts
+  const handleTap = () => {
+    if (pose) return;
+
+    const nextPose = poses[poseIndex];
+    setCurrentPose(nextPose);
+    setPoseIndex((i) => (i + 1) % poses.length);
+
+    setTimeout(() => {
+      setCurrentPose("groove");
+    }, poseDurations[nextPose]);
   };
 
   return (
     <motion.div
       className={styles.wrapper}
-      animate={mascotControls}
+      variants={mascotVariants}
+      animate={currentPose}
+      initial="groove"
       onTap={handleTap}
       onClick={handleTap}
     >
@@ -115,8 +222,12 @@ export const FunkyMascotSvg: React.FC = () => {
         {/* SUNGLASSES */}
         <motion.g
           id="sunglasses"
-          animate={sunglassesControls}
-          style={{ transformOrigin: "center center" }}
+          variants={sunglassesVariants}
+          animate={currentPose}
+          style={{
+            transformBox: "fill-box",
+            transformOrigin: "50% 50%",
+          }}
         >
           <rect
             fill="#111111"
@@ -233,13 +344,16 @@ export const FunkyMascotSvg: React.FC = () => {
         {/* NECKLACE */}
         <motion.g
           id="necklace"
-          animate={{
-            rotate: [-1, 1, -1],
-          }}
+          variants={necklaceVariants}
+          animate={currentPose}
           transition={{
-            duration: 1.8,
-            repeat: Infinity,
+            duration: 1.2,
+            repeat: currentPose === "groove" ? Infinity : 0,
             ease: "easeInOut",
+          }}
+          style={{
+            transformBox: "fill-box",
+            transformOrigin: "50% 50%",
           }}
         >
           <path
@@ -336,9 +450,12 @@ export const FunkyMascotSvg: React.FC = () => {
         {/* WINGS */}
         <motion.g
           id="left-wing"
-          animate={{ rotate: [-3, 3, -3] }}
-          transition={{ duration: 2.2, repeat: Infinity }}
-          style={{ transformOrigin: "right center" }}
+          variants={wingVariants}
+          animate={currentPose}
+          style={{
+            transformBox: "fill-box",
+            transformOrigin: "100% 50%",
+          }}
         >
           <path
             fill="#ffc700"
@@ -356,9 +473,12 @@ export const FunkyMascotSvg: React.FC = () => {
         </motion.g>
         <motion.g
           id="right-wing"
-          animate={{ rotate: [3, -3, 3] }}
-          transition={{ duration: 2.2, repeat: Infinity }}
-          style={{ transformOrigin: "left center" }}
+          variants={wingVariants}
+          animate={currentPose}
+          style={{
+            transformBox: "fill-box",
+            transformOrigin: "0% 50%",
+          }}
         >
           <path
             fill="#ffc700"
@@ -432,4 +552,4 @@ export const FunkyMascotSvg: React.FC = () => {
     </motion.div>
   );
 };
-export default FunkyMascotSvg;
+export default DancingMascot;

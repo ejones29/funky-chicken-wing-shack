@@ -10,8 +10,6 @@
    Mascot Base Image Styling
 --------------------------------------*/
 .image {
-  /* width: 260px; */
-  /* max-width: 80vw; */
   width: clamp(250px, 45vw, 300px);
   filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.9));
   pointer-events: none;

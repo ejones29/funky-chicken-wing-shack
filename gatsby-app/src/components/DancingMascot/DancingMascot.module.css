@@ -3,14 +3,14 @@
   cursor: pointer;
   touch-action: manipulation;
   user-select: none;
+  will-change: transform;
+  width: clamp(300px, 45vw, 300px);
 }
 
 .svg {
-  /* width: 100%;
-  max-width: 360px; */
   height: auto;
   will-change: transform;
-  width: clamp(250px, 45vw, 300px);
+  width: clamp(260px, 45vw, 320px);
   filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.9));
   pointer-events: none;
 }

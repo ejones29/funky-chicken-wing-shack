@@ -1,10 +1,12 @@
 import React from "react";
-import * as styles from "./BottomTabBar.module.css";
 import { Link } from "gatsby";
+import * as styles from "./BottomTabBar.module.css";
 
-import HomeIcon from "../../assets/icons/home-icon.svg";
-import MenuIcon from "../../assets/icons/menu-icon.svg";
-import AccountIcon from "../../assets/icons/account-icon.svg";
+// react-icons: https://react-icons.github.io/react-icons/search/#q=party
+import { HiHome } from "react-icons/hi";
+import { FaReceipt } from "react-icons/fa";
+import { LuPartyPopper } from "react-icons/lu";
+
 interface TabItem {
   label: string;
   icon: React.ReactNode;
@@ -12,9 +14,9 @@ interface TabItem {
 }
 
 const tabs: TabItem[] = [
-  { label: "Home", icon: <HomeIcon />, to: "/" },
-  { label: "Menu", icon: <MenuIcon />, to: "/menu" },
-  { label: "Account", icon: <AccountIcon />, to: "/account" },
+  { label: "Home", icon: <HiHome />, to: "/" },
+  { label: "Order", icon: <FaReceipt />, to: "/order" },
+  { label: "Party", icon: <LuPartyPopper />, to: "/party" },
 ];
 
 export const BottomTabBar: React.FC = () => {

@@ -7,32 +7,33 @@ export const ActionButtons: React.FC = () => {
     <section className={styles.section} aria-label="Quick actions">
       <div className={styles.grid}>
         <ActionButton
-          as="link"
           label="Order Now"
-          variant="teal"
-          to="/order"
           icon="🍗"
+          variant="teal"
+          as="link"
+          to="/order"
         />
         <ActionButton
-          as="link"
           label="Find Your Flavor"
-          variant="pink"
-          to="/flavors"
           icon="🔥"
+          variant="pink"
+          as="link"
+          to="/flavors"
+        />
+        <ActionButton
+          label="Let's Party"
+          icon="🕺"
+          variant="teal"
+          as="link"
+          to="/party"
         />
         {/* <ActionButton
-          label="Meal Combos"
-          variant="pink"
-          onClick={() => {}}
-          icon="🍽️"
-        />
-        <ActionButton
           label="Add Brews"
           variant="teal"
           onClick={() => {}}
           icon="🍺"
-        />
-        <ActionButton
+        /> */}
+        {/* <ActionButton
           label="Track My Order"
           variant="teal"
           onClick={() => {}}

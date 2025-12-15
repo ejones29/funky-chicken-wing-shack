@@ -1,0 +1,27 @@
+.partyControls {
+  display: flex;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  justify-content: center;
+}
+
+.partyControls button {
+  background: linear-gradient(135deg, #ff3fbc, #ff8f00);
+  border: none;
+  color: #111;
+  font-weight: 800;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(255, 63, 188, 0.5);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.partyControls button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 63, 188, 0.8);
+}
+
+.partyControls button:active {
+  transform: scale(0.95);
+}

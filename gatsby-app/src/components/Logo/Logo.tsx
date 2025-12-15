@@ -1,7 +1,7 @@
 import React from "react";
-import FunkyChickenLogo from "../../assets/funky-chicken-logo.svg";
+import FunkyChickenLogo from "../../assets/brand/fc-logo-wordmark.svg";
 import * as styles from "./Logo.module.css";
-import {Link} from "gatsby";
+import { Link } from "gatsby";
 
 export default function Logo() {
   return (

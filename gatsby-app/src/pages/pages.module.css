@@ -30,8 +30,19 @@
 .section {
   margin-bottom: 64px;
 }
+
 .section:last-child {
   margin-bottom: 0;
+}
+
+.sectionContent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 /* 3-column layout on desktop */

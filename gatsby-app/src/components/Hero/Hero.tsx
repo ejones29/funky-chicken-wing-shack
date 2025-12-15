@@ -1,8 +1,6 @@
 import React from "react";
 import * as styles from "./Hero.module.css";
 import { FunkyMascot } from "../FunkyMascot/FunkyMascot";
-// import MascotSVG from "../../assets/svgs/mascot.svg";
-import { FunkyMascotSvg } from "../FunkyMascotSvg/FunkyMascotSvg";
 
 export const Hero: React.FC = () => {
   return (
@@ -15,8 +13,7 @@ export const Hero: React.FC = () => {
             Get Saucy.
           </span>
         </h1>
-        <FunkyMascotSvg />
-        {/* <FunkyMascot /> */}
+        <FunkyMascot />
       </div>
     </section>
   );
