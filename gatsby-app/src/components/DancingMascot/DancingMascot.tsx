@@ -3,17 +3,27 @@ import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import * as styles from "./DancingMascot.module.css";
 
-export type DancePose = "groove" | "lean" | "spin" | "disco";
+export type DancePose = "idle" | "groove" | "lean" | "spin" | "disco";
 
 interface DancingMascotProps {
   pose?: DancePose;
 }
 
 const mascotVariants = {
+  idle: {
+    x: 0,
+    y: 0,
+    rotate: 0,
+    scale: 1,
+  },
   groove: {
-    y: [0, -10, 0],
-    rotate: [0, -6, 6, 0],
-    transition: { duration: 0.6 },
+    y: [0, -6, 0],
+    rotate: [0, -3, 3, 0],
+    transition: {
+      duration: 2.2,
+      repeat: Infinity,
+      ease: "easeInOut" as const,
+    },
   },
   lean: {
     rotate: -12,
@@ -34,78 +44,48 @@ const mascotVariants = {
       rotate: {
         repeat: Infinity,
         duration: 1.2,
-        ease: "linear",
+        ease: "linear" as const,
       },
       y: {
         repeat: Infinity,
         duration: 0.6,
-        ease: "easeInOut",
+        ease: "easeInOut" as const,
       },
     },
   },
 };
 
 const wingVariants = {
-  groove: {
-    rotate: [-18, 18, -18],
-    transition: {
-      duration: 1.2,
-      repeat: Infinity,
-      ease: "easeInOut",
-    },
-  },
+  idle: { rotate: 0 },
+  groove: { rotate: [-25, 18, -18] },
   lean: { rotate: 20 },
   spin: { rotate: [-30, 30, -30] },
   disco: {
     rotate: [-35, 35, -35],
-    transition: {
-      repeat: Infinity,
-      duration: 0.4,
-      ease: "easeInOut",
-    },
+    transition: { repeat: Infinity, duration: 0.4 },
   },
 };
 
 const sunglassesVariants = {
-  groove: {
-    rotate: [-6, 6, -6],
-    transition: {
-      duration: 2.5,
-      repeat: Infinity,
-      ease: "easeInOut",
-    },
-  },
+  idle: { rotate: 0, y: 0 },
+  groove: { rotate: [-6, 6, -6] },
   lean: { y: -6 },
   spin: { rotate: [0, 20, -20, 0] },
   disco: {
     rotate: [-12, 12, -12],
     y: [0, -4, 0],
-    transition: {
-      repeat: Infinity,
-      duration: 0.5,
-      ease: "easeInOut",
-    },
+    transition: { repeat: Infinity, duration: 0.5 },
   },
 };
 
 const necklaceVariants = {
-  groove: {
-    rotate: [-4, 4, -4],
-    transition: {
-      duration: 1.8,
-      repeat: Infinity,
-      ease: "easeInOut",
-    },
-  },
+  idle: { rotate: 0 },
+  groove: { rotate: [-4, 4, -4] },
   lean: { rotate: 6 },
   spin: { rotate: [-10, 10, -10] },
   disco: {
     rotate: [-20, 20, -20],
-    transition: {
-      repeat: Infinity,
-      duration: 0.4,
-      ease: "easeInOut",
-    },
+    transition: { repeat: Infinity, duration: 0.4 },
   },
 };
 
@@ -113,9 +93,11 @@ export const DancingMascot: React.FC<DancingMascotProps> = ({ pose }) => {
   const poses: DancePose[] = ["groove", "lean", "spin"];
 
   const [poseIndex, setPoseIndex] = useState(0);
-  const [currentPose, setCurrentPose] = useState<DancePose>("groove");
+  const [currentPose, setCurrentPose] = useState<DancePose>("idle");
+  const [poseKey, setPoseKey] = useState(0);
 
   const poseDurations: Record<DancePose, number> = {
+    idle: 0,
     groove: 600,
     lean: 400,
     spin: 800,
@@ -125,12 +107,14 @@ export const DancingMascot: React.FC<DancingMascotProps> = ({ pose }) => {
   useEffect(() => {
     if (!pose) return;
 
+    // Force animation restart
+    setPoseKey((k) => k + 1);
     setCurrentPose(pose);
 
     if (pose === "disco") return;
 
     const timeout = setTimeout(() => {
-      setCurrentPose("groove");
+      setCurrentPose("idle");
     }, poseDurations[pose]);
 
     return () => clearTimeout(timeout);
@@ -151,10 +135,11 @@ export const DancingMascot: React.FC<DancingMascotProps> = ({ pose }) => {
 
   return (
     <motion.div
+      key={`${currentPose}-${poseKey}`}
       className={styles.wrapper}
       variants={mascotVariants}
       animate={currentPose}
-      initial="groove"
+      initial="idle"
       onTap={handleTap}
       onClick={handleTap}
     >
@@ -163,7 +148,36 @@ export const DancingMascot: React.FC<DancingMascotProps> = ({ pose }) => {
         viewBox="0 0 1024 1024"
         xmlns="http://www.w3.org/2000/svg"
         className={styles.svg}
+        style={{ overflow: "visible" }}
       >
+        <defs>
+          <radialGradient id="discoGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#ff3fbc" stopOpacity="0.9" />
+            <stop offset="45%" stopColor="#8b5cf6" stopOpacity="0.6" />
+            <stop offset="70%" stopColor="#22d3ee" stopOpacity="0.35" />
+            <stop offset="100%" stopColor="#000000" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+        {currentPose === "disco" && (
+          <motion.circle
+            cx="512"
+            cy="520"
+            r="3020"
+            fill="url(#discoGlow)"
+            style={{
+              mixBlendMode: "screen",
+              pointerEvents: "none",
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0.4, 0.8, 0.4] }}
+            transition={{
+              duration: 1.2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        )}
+
         {/* BODY */}
         <g id="body">
           <path
@@ -357,11 +371,7 @@ export const DancingMascot: React.FC<DancingMascotProps> = ({ pose }) => {
           }}
         >
           <path
-            fill="#ffffff"
-            stroke="#111111"
-            strokeWidth="16"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+            fill="transparent"
             className="necklace-fill outline"
             d="M450 470
          C 480 500, 520 515, 560 518
@@ -452,6 +462,7 @@ export const DancingMascot: React.FC<DancingMascotProps> = ({ pose }) => {
           id="left-wing"
           variants={wingVariants}
           animate={currentPose}
+          transition={currentPose === "groove" ? { delay: 0 } : undefined}
           style={{
             transformBox: "fill-box",
             transformOrigin: "100% 50%",
@@ -475,6 +486,7 @@ export const DancingMascot: React.FC<DancingMascotProps> = ({ pose }) => {
           id="right-wing"
           variants={wingVariants}
           animate={currentPose}
+          transition={currentPose === "groove" ? { delay: 0.7 } : undefined}
           style={{
             transformBox: "fill-box",
             transformOrigin: "0% 50%",
