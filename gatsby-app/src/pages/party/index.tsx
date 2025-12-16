@@ -12,10 +12,12 @@ export default function PartyPage() {
   return (
     <div className={pageStyles.pageWrapper}>
       <h1 className={pageStyles.pageHeading}>Let's Boogie</h1>
-      <p className={pageStyles.pageSubheading}>Welcome to the Party!</p>
+
       <section className={pageStyles.section}>
         <div className={pageStyles.sectionContent}>
-          <p>Our funky mascot is here to show you some groovy moves.</p>
+          <p className="textCenter">
+            Our funky mascot is here to show you some groovy moves.
+          </p>
           {/* 🎛 Party Controls */}
           <div className={partyStyles.partyControls}>
             <button onClick={() => setPose("groove")}>Groove</button>
