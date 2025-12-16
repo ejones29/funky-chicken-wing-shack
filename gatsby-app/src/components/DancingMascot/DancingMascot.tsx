@@ -7,12 +7,15 @@ export type DancePose = "idle" | "groove" | "lean" | "spin" | "disco";
 
 interface DancingMascotProps {
   pose?: DancePose;
+  trigger?: number;
+  isPlayingMusic?: boolean;
 }
 
 const mascotVariants = {
   idle: {
     x: 0,
-    y: 0,
+    y: [0, 1, 0],
+    transition: { duration: 3, repeat: Infinity },
     rotate: 0,
     scale: 1,
   },
@@ -37,7 +40,7 @@ const mascotVariants = {
     transition: { duration: 0.8, ease: "easeInOut" as const },
   },
   disco: {
-    rotate: [0, 360],
+    // rotate: [0, 360],
     y: [0, -12, 0],
     scale: [1, 1.05, 1],
     transition: {
@@ -62,7 +65,7 @@ const wingVariants = {
   spin: { rotate: [-30, 30, -30] },
   disco: {
     rotate: [-35, 35, -35],
-    transition: { repeat: Infinity, duration: 0.4 },
+    transition: { repeat: Infinity, duration: 0.6 },
   },
 };
 
@@ -72,7 +75,7 @@ const sunglassesVariants = {
   lean: { y: -6 },
   spin: { rotate: [0, 20, -20, 0] },
   disco: {
-    rotate: [-12, 12, -12],
+    rotate: [-3, 3, -3],
     y: [0, -4, 0],
     transition: { repeat: Infinity, duration: 0.5 },
   },
@@ -84,15 +87,32 @@ const necklaceVariants = {
   lean: { rotate: 6 },
   spin: { rotate: [-10, 10, -10] },
   disco: {
-    rotate: [-20, 20, -20],
+    rotate: [0, 0, 0],
     transition: { repeat: Infinity, duration: 0.4 },
   },
 };
 
-export const DancingMascot: React.FC<DancingMascotProps> = ({ pose }) => {
-  const poses: DancePose[] = ["groove", "lean", "spin"];
+const beakVariants = {
+  idle: {
+    y: 0,
+    rotate: 0,
+  },
+  sing: {
+    y: [0, 16, 0, 12, 0],
+    rotate: [0, 14, 0, 16, 0],
+    transition: {
+      duration: 0.8,
+      repeat: Infinity,
+      ease: "easeInOut" as const,
+    },
+  },
+};
 
-  const [poseIndex, setPoseIndex] = useState(0);
+export const DancingMascot: React.FC<DancingMascotProps> = ({
+  pose,
+  trigger,
+  isPlayingMusic = false,
+}) => {
   const [currentPose, setCurrentPose] = useState<DancePose>("idle");
   const [poseKey, setPoseKey] = useState(0);
 
@@ -107,7 +127,6 @@ export const DancingMascot: React.FC<DancingMascotProps> = ({ pose }) => {
   useEffect(() => {
     if (!pose) return;
 
-    // Force animation restart
     setPoseKey((k) => k + 1);
     setCurrentPose(pose);
 
@@ -118,20 +137,7 @@ export const DancingMascot: React.FC<DancingMascotProps> = ({ pose }) => {
     }, poseDurations[pose]);
 
     return () => clearTimeout(timeout);
-  }, [pose]);
-
-  // Tap / click dance pose - prevent overlap with timeouts
-  const handleTap = () => {
-    if (pose) return;
-
-    const nextPose = poses[poseIndex];
-    setCurrentPose(nextPose);
-    setPoseIndex((i) => (i + 1) % poses.length);
-
-    setTimeout(() => {
-      setCurrentPose("groove");
-    }, poseDurations[nextPose]);
-  };
+  }, [pose, trigger]);
 
   return (
     <motion.div
@@ -140,8 +146,6 @@ export const DancingMascot: React.FC<DancingMascotProps> = ({ pose }) => {
       variants={mascotVariants}
       animate={currentPose}
       initial="idle"
-      onTap={handleTap}
-      onClick={handleTap}
     >
       <svg
         width="100%"
@@ -161,8 +165,8 @@ export const DancingMascot: React.FC<DancingMascotProps> = ({ pose }) => {
         {currentPose === "disco" && (
           <motion.circle
             cx="512"
-            cy="520"
-            r="3020"
+            cy="512"
+            r="1024"
             fill="url(#discoGlow)"
             style={{
               mixBlendMode: "screen",
@@ -339,7 +343,15 @@ export const DancingMascot: React.FC<DancingMascotProps> = ({ pose }) => {
           />
         </g>
         {/* Lower Beak (for mouth open animation) */}
-        <g id="lower-beak">
+        <motion.g
+          id="lower-beak"
+          variants={beakVariants}
+          animate={isPlayingMusic ? "sing" : "idle"}
+          style={{
+            transformBox: "fill-box",
+            transformOrigin: "50% 0%",
+          }}
+        >
           <path
             fill="#ff9f45"
             stroke="#111111"
@@ -353,7 +365,7 @@ export const DancingMascot: React.FC<DancingMascotProps> = ({ pose }) => {
          C 625 468, 615 465, 610 458
          C 605 450, 610 430, 622 410 Z"
           />
-        </g>
+        </motion.g>
 
         {/* NECKLACE */}
         <motion.g
