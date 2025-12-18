@@ -18,9 +18,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
 
-        {!isTabletBp && <BottomTabBar />}
         {/* <Footer /> */}
       </PageBackground>
+      {!isTabletBp && <BottomTabBar />}
     </main>
   );
 }
