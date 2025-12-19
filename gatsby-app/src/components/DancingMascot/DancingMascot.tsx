@@ -20,12 +20,14 @@ const mascotVariants = {
     scale: 1,
   },
   groove: {
-    y: [0, -6, 0],
-    rotate: [0, -3, 3, 0],
+    x: [0, -10, 0, 10, 0],
+    y: [0, -4, 0, -3, 0],
+    rotate: [0, -2.5, 0, 2.5, 0],
+    scale: [1, 1.01, 1, 1.01, 1],
     transition: {
-      duration: 2.2,
+      duration: 7.5,
       repeat: Infinity,
-      ease: "easeInOut" as const,
+      ease: "easeInOut",
     },
   },
   lean: {
@@ -40,20 +42,52 @@ const mascotVariants = {
     transition: { duration: 0.8, ease: "easeInOut" as const },
   },
   disco: {
-    // rotate: [0, 360],
     y: [0, -12, 0],
     scale: [1, 1.05, 1],
     transition: {
-      rotate: {
-        repeat: Infinity,
-        duration: 1.2,
-        ease: "linear" as const,
-      },
       y: {
         repeat: Infinity,
         duration: 0.6,
         ease: "easeInOut" as const,
       },
+    },
+  },
+};
+
+const headVariants = {
+  idle: {
+    rotate: 0,
+    y: 0,
+  },
+
+  groove: {
+    rotate: [-1.2, 0.8, -1.2],
+    y: [0, -1.5, 0],
+    transition: {
+      duration: 4.8,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  },
+
+  lean: {
+    rotate: -4,
+    y: -2,
+    transition: { duration: 0.4 },
+  },
+
+  spin: {
+    rotate: [0, -6, 6, 0],
+    transition: { duration: 0.8, ease: "easeInOut" },
+  },
+
+  disco: {
+    rotate: [-8, 8, -8],
+    y: [0, -4, 0],
+    transition: {
+      duration: 0.6,
+      repeat: Infinity,
+      ease: "easeInOut",
     },
   },
 };
@@ -114,7 +148,6 @@ export const DancingMascot: React.FC<DancingMascotProps> = ({
   isPlayingMusic = false,
 }) => {
   const [currentPose, setCurrentPose] = useState<DancePose>("idle");
-  const [poseKey, setPoseKey] = useState(0);
 
   const poseDurations: Record<DancePose, number> = {
     idle: 0,
@@ -127,21 +160,20 @@ export const DancingMascot: React.FC<DancingMascotProps> = ({
   useEffect(() => {
     if (!pose) return;
 
-    setPoseKey((k) => k + 1);
     setCurrentPose(pose);
 
-    if (pose === "disco") return;
+    // Only auto-return for one-shot poses
+    if (pose === "lean" || pose === "spin") {
+      const timeout = setTimeout(() => {
+        setCurrentPose("idle");
+      }, poseDurations[pose]);
 
-    const timeout = setTimeout(() => {
-      setCurrentPose("idle");
-    }, poseDurations[pose]);
-
-    return () => clearTimeout(timeout);
+      return () => clearTimeout(timeout);
+    }
   }, [pose, trigger]);
 
   return (
     <motion.div
-      key={`${currentPose}-${poseKey}`}
       className={styles.wrapper}
       variants={mascotVariants}
       animate={currentPose}
@@ -201,7 +233,15 @@ export const DancingMascot: React.FC<DancingMascotProps> = ({
         </g>
 
         {/* HEAD */}
-        <g id="head">
+        <motion.g
+          id="head"
+          variants={headVariants}
+          animate={currentPose}
+          style={{
+            transformBox: "fill-box",
+            transformOrigin: "50% 80%", // pivot near neck
+          }}
+        >
           <path
             fill="#ffc700"
             stroke="#111111"
@@ -216,10 +256,24 @@ export const DancingMascot: React.FC<DancingMascotProps> = ({
          C 690 310, 660 270, 630 250
          C 580 220, 490 220, 420 260 Z"
           />
-        </g>
+        </motion.g>
 
         {/* COMB */}
-        <g id="comb">
+        <motion.g
+          id="comb"
+          animate={{
+            rotate: currentPose === "groove" ? [-2, 2, -2] : 0,
+          }}
+          transition={{
+            duration: 5.2,
+            repeat: currentPose === "groove" ? Infinity : 0,
+            ease: "easeInOut",
+          }}
+          style={{
+            transformBox: "fill-box",
+            transformOrigin: "50% 100%",
+          }}
+        >
           <path
             fill="#ff3f6a"
             stroke="#111111"
@@ -235,7 +289,7 @@ export const DancingMascot: React.FC<DancingMascotProps> = ({
          C 610 240, 580 240, 560 250
          C 540 230, 510 225, 470 220 Z"
           />
-        </g>
+        </motion.g>
 
         {/* SUNGLASSES */}
         <motion.g
